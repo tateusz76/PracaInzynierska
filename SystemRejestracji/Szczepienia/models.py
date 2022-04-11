@@ -1,3 +1,4 @@
+from datetime import datetime
 from django.db import models
 
 # Create your models here.
@@ -20,7 +21,19 @@ class Pacjent(models.Model):
     szczepionka = models.ForeignKey(Szczepionka, related_name='szczepionki', on_delete=models.DO_NOTHING, default = '')
 
     def __str__(self):
-        return self.imie + ' ' +  self.nazwisko + ' ' + self.szczepionka
+        return self.imie + ' ' +  self.nazwisko
 
     class Meta:
         verbose_name_plural = "Pacjenci"
+
+
+class Szczepienie(models.Model):
+    pacjent = models.ForeignKey(Pacjent, related_name='szczepionyKto', on_delete=models.DO_NOTHING, default = 0)
+    dataSzczepienia = models.DateField(default= datetime.now, blank=True)
+    czyOstatniaDawka = models.BooleanField(default=False)
+
+    def __str__(self):
+        return str(self.pacjent) + ' ' + str(self.dataSzczepienia)
+
+    class Meta:
+        verbose_name_plural = "Szczepienia"

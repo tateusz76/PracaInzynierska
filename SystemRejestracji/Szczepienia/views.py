@@ -14,7 +14,6 @@ class PacjentList(generics.ListCreateAPIView):
     serializer_class = PacjentSerializer
     name = 'pacjent-list'
 
-
 class PacjentDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Pacjent.objects.all()
     serializer_class = PacjentSerializer
@@ -26,11 +25,21 @@ class SzczepionkaList(generics.ListCreateAPIView):
     serializer_class = SzczepionkaSerializer
     name = 'szczepionka-list'
 
-
 class SzczepionkaDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Szczepionka.objects.all()
     serializer_class = SzczepionkaSerializer
     name = 'szczepionka-details'
+
+
+class SzczepienieList(generics.ListCreateAPIView):
+    queryset = Szczepienie.objects.all()
+    serializer_class = SzczepienieSerializer
+    name = 'szczepienie-list'
+
+class SzczepienieDetail(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Szczepienie.objects.all()
+    serializer_class = SzczepienieSerializer
+    name = 'szczepienie-details'
 
 
 class ApiRoot(generics.GenericAPIView):
@@ -38,4 +47,6 @@ class ApiRoot(generics.GenericAPIView):
 
     def get(self, request, *args, **kwargs):
         return Response({'pacjenci': reverse(PacjentList.name, request=request),
-                         'szczepionki': reverse(SzczepionkaList.name, request=request),})
+                         'szczepionki': reverse(SzczepionkaList.name, request=request),
+                         'szczepienia': reverse(SzczepienieList.name, request=request),
+                         })
