@@ -13,6 +13,20 @@ class Szczepionka(models.Model):
         verbose_name_plural = "Szczepionki"
 
 
+class Zaszczepiony(models.Model):
+    imie = models.CharField(max_length=45)
+    nazwisko = models.CharField(max_length=45)
+    pesel = models.CharField(max_length=11, unique=True)
+    telefon = models.CharField(max_length=9, unique=True)
+    szczepionka = models.CharField(max_length=45)
+
+    def __str__(self):
+        return self.imie + ' ' + self.nazwisko
+
+    class Meta:
+        verbose_name_plural = "Zaszczepieni"
+
+
 class Pacjent(models.Model):
     imie = models.CharField(max_length=45)
     nazwisko = models.CharField(max_length=45)
@@ -22,6 +36,10 @@ class Pacjent(models.Model):
 
     def __str__(self):
         return self.imie + ' ' +  self.nazwisko
+
+    def delete(self, *args, **kwargs):
+        Zaszczepiony.objects.create(imie=self.imie, nazwisko=self.nazwisko, pesel = self.pesel, telefon = self.telefon, szczepionka = self.szczepionka)
+        super().delete(*args, **kwargs)
 
     class Meta:
         verbose_name_plural = "Pacjenci"
