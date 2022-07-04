@@ -42,6 +42,19 @@ class SzczepienieDetail(generics.RetrieveUpdateDestroyAPIView):
     name = 'szczepienie-details'
 
 
+class ZaszczepionyList(generics.ListCreateAPIView):
+    queryset = Zaszczepiony.objects.all()
+    serializer_class = ZaszczepionySerializer
+    name = 'zaszczepiony-list'
+
+class ZaszczepionyDetail(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Zaszczepiony.objects.all()
+    serializer_class = ZaszczepionySerializer
+    name = 'zaszczepiony-details'
+
+
+
+
 class ApiRoot(generics.GenericAPIView):
     name = 'api-root'
 
@@ -49,4 +62,5 @@ class ApiRoot(generics.GenericAPIView):
         return Response({'pacjenci': reverse(PacjentList.name, request=request),
                          'szczepionki': reverse(SzczepionkaList.name, request=request),
                          'szczepienia': reverse(SzczepienieList.name, request=request),
+                         'zaszczepiony': reverse(ZaszczepionyList.name, request=request),
                          })

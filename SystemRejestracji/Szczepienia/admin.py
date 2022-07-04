@@ -6,3 +6,4 @@ from .models import *
 admin.site.register(Pacjent)
 admin.site.register(Szczepionka)
 admin.site.register(Szczepienie)
+admin.site.register(Zaszczepiony)

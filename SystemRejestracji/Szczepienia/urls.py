@@ -10,5 +10,7 @@ urlpatterns = [
     path('szczepionka/<int:pk>', views.SzczepionkaDetail.as_view(), name='szczepionka-details'),
     path('szczepienie', views.SzczepienieList.as_view(), name='szczepienie-list'),
     path('szczepienie/<int:pk>', views.SzczepienieDetail.as_view(), name='szczepienie-details'),
+    path('zaszczepiony', views.ZaszczepionyList.as_view(), name='zaszczepiony-list'),
+    path('zaszczepiony/<int:pk>', views.ZaszczepionyDetail.as_view(), name='zaszczepiony-details'),
     path('', views.ApiRoot.as_view(), name=views.ApiRoot.name),
 ]
