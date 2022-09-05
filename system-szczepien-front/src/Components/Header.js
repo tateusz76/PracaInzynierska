@@ -1,15 +1,17 @@
 import React from "react";
-import {Link, useNavigate} from 'react-router-dom'
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import {BrowserRouter as Router, Route, Routes, Link, useNavigate} from 'react-router-dom';
 import App from "../App";
-import Login from "../Flow/Login/Login";
-
+import AddSzczepionka from "./AddSzczepionka";
 
 const Header = () => {
 
+    const navigate = useNavigate();
 
     return (
-        <div>z</div>
+        <div>
+             <Link to='/' className='navLink'>Strona glowna</Link>
+             <Link to='/dodaj_szczepionke' className='navLink'>Dodaj szczepionkę</Link>
+        </div>
     )
 }
 
