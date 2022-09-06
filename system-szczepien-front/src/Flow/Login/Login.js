@@ -1,71 +1,63 @@
 import './Login.css'
-import { useFormik } from 'formik';
 import { useContext, useState } from 'react';
 import { Link } from 'react-router-dom';
+import Header from '../../Components/Header';
+import axios from "axios";
+import React from "react";
 
 function Login() {
-    
-    const [loginError, setLoginError] = useState(false);
 
-    const formik = useFormik({
-        initialValues: {
-          email: '',
-          password: '',
-        },
-        // onSubmit: () => handleSignIn(),
+  const [formValue, setformValue] = React.useState({
+    email: '',
+    password: '',
+  });
+
+  const handleSubmit = async(e) => {
+    e.preventDefault();
+    const loginData = new FormData();
+    loginData.append("email", formValue.email)
+    loginData.append("password", formValue.password)
+
+    try {
+      const response = await axios({
+        method: "post",
+        url: "http://127.0.0.1:8000/szczepienia/token/",
+        data: loginData,
+        headers: { "Content-Type": "application/json" },
       })
+      .then((res) => {     
+        localStorage["access"]=res.data.access
+        localStorage["refresh"]=res.data.refresh
+  });
+    } catch(error) {
+      console.log(error)
+    }
+  }
 
-return (
-    <div className='loginForm'>
-        <h1>Zaloguj się</h1>
+  const handleChange = (event) => {
+    setformValue({
+      ...formValue,
+      [event.target.name]: event.target.value
+    });
+  }
 
-      <form onSubmit={formik.handleSubmit}>
+    
+  return (
+    <div className="Login">
+    <h1>Zaloguj się</h1>
+    <Header></Header>
 
-        <label htmlFor='email'>
-        {
-          formik.errors.email && formik.touched.email
-          ? <p className='formError'>{formik.errors.email}</p> 
-          : <p className='formLabel'>E-mail</p>
-        }
-        </label>
-        <input 
-          name='email' 
-          placeholder='E-mail' 
-          type="text" 
-          onBlur={formik.handleBlur}
-          value={formik.values.email} 
-          onChange={formik.handleChange}
-        />
-
-        <label htmlFor='password'>
-        {
-          formik.errors.password && formik.touched.password
-          ? <p className='formError'>{formik.errors.password}</p> 
-          : <p className='formLabel'>Password</p>
-        }
-        </label>
-        <input 
-          name='password' 
-          placeholder='Password' 
-          type="password" 
-          onBlur={formik.handleBlur}
-          value={formik.values.password} 
-          onChange={formik.handleChange}
-        />
-
-        
-
-        <a href='' style={{color: '#577590'}}>Forgot your password?</a>
-
-        <div className='buttonsContainer'>
-          <Link to={'/register'} className='button' >Sign Up!</Link>
-          <button className='button' type='submit'>Sign in!</button>
-        </div>
-
-        {loginError && <p style={{color: 'red', marginTop: '20px', textAlign: 'center', fontSize: '21px'}}>Invalid credentials.</p>}
-      </form>
-    </div>
-  )
+    <form onSubmit={handleSubmit}>
+      <label> Adres email:
+        <input type="text" name="email"  onChange={handleChange}/>
+      </label>
+      <label> Hasło:
+        <input type="password" name="password"  onChange={handleChange}/>
+      </label>
+      <input type="submit" value="Wyślij" />
+    </form>
+  </div>
+    )
 }
 
 export default Login;

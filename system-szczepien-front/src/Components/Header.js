@@ -11,6 +11,7 @@ const Header = () => {
         <div>
              <Link to='/' className='navLink'>Strona glowna</Link>
              <Link to='/dodaj_szczepionke' className='navLink'>Dodaj szczepionkę</Link>
+             <Link to='/login' className='navLink'>Zaloguj się</Link>
         </div>
     )
 }

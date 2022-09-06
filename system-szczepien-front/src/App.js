@@ -4,6 +4,7 @@ import React from "react";
 import AddSzczepionka from './Components/AddSzczepionka';
 import {BrowserRouter as Router, Route, Routes, Link, useNavigate} from 'react-router-dom';
 import MainPage from './Components/MainPage';
+import Login from './Flow/Login/Login';
 
 
 function App() {
@@ -13,6 +14,7 @@ function App() {
             <Route path="*" element={<MainPage />} />
             <Route exact path="/" element={<MainPage />} />
             <Route exact path="dodaj_szczepionke" element={<AddSzczepionka/>} />
+            <Route exact path="login" element={<Login/>} />
       </Routes>
     </div>
   );
