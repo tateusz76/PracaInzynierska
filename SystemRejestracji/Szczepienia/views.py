@@ -9,15 +9,15 @@ from rest_framework import permissions
 # Create your views here.
 
 
-class PacjentList(generics.ListCreateAPIView):
-    queryset = Pacjent.objects.all()
-    serializer_class = PacjentSerializer
-    name = 'pacjent-list'
-
-class PacjentDetail(generics.RetrieveUpdateDestroyAPIView):
-    queryset = Pacjent.objects.all()
-    serializer_class = PacjentSerializer
-    name = 'pacjent-details'
+# class PacjentList(generics.ListCreateAPIView):
+#     queryset = Pacjent.objects.all()
+#     serializer_class = PacjentSerializer
+#     name = 'pacjent-list'
+#
+# class PacjentDetail(generics.RetrieveUpdateDestroyAPIView):
+#     queryset = Pacjent.objects.all()
+#     serializer_class = PacjentSerializer
+#     name = 'pacjent-details'
 
 
 class SzczepionkaList(generics.ListCreateAPIView):
@@ -59,7 +59,7 @@ class ApiRoot(generics.GenericAPIView):
     name = 'api-root'
 
     def get(self, request, *args, **kwargs):
-        return Response({'pacjenci': reverse(PacjentList.name, request=request),
+        return Response({#'pacjenci': reverse(PacjentList.name, request=request),
                          'szczepionki': reverse(SzczepionkaList.name, request=request),
                          'szczepienia': reverse(SzczepienieList.name, request=request),
                          'zaszczepiony': reverse(ZaszczepionyList.name, request=request),

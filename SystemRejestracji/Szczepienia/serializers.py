@@ -2,12 +2,11 @@ from rest_framework import serializers
 from .models import *
 
 
-class PacjentSerializer(serializers.HyperlinkedModelSerializer):
-    szczepionka = serializers.SlugRelatedField(queryset=Szczepionka.objects.all(), slug_field='nazwaSzczepionki')
+class PacjentSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Pacjent
-        fields = ['id', 'imie', 'nazwisko', 'pesel', 'telefon', 'szczepionka']
+        fields = '__all__'
 
 
 class SzczepionkaSerializer(serializers.HyperlinkedModelSerializer):
@@ -19,10 +18,12 @@ class SzczepionkaSerializer(serializers.HyperlinkedModelSerializer):
 
 class SzczepienieSerializer(serializers.HyperlinkedModelSerializer):
     pacjent = serializers.SlugRelatedField(queryset=Pacjent.objects.all(), slug_field='id')
+    szczepionka = serializers.SlugRelatedField(queryset=Szczepionka.objects.all(), slug_field='nazwaSzczepionki')
 
     class Meta:
         model = Szczepienie
-        fields = ['id', 'pacjent', 'dataSzczepienia', 'czyOstatniaDawka']
+        fields = ['id', 'pacjent', 'dataSzczepienia', 'szczepionka', 'czyOstatniaDawka']
+
 
 class ZaszczepionySerializer(serializers.HyperlinkedModelSerializer):
 
