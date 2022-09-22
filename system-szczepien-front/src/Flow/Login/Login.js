@@ -1,7 +1,7 @@
 import './Login.css'
 import { useContext, useState } from 'react';
 import { Link } from 'react-router-dom';
-import Header from '../../Components/Header';
+import Header from '../../Components/Header/Header';
 import axios from "axios";
 import React from "react";
 
@@ -44,8 +44,8 @@ function Login() {
     
   return (
     <div className="Login">
-    <h1>Zaloguj się</h1>
     <Header></Header>
+    <h1>Zaloguj się</h1>
 
     <form onSubmit={handleSubmit}>
       <label> Adres email:

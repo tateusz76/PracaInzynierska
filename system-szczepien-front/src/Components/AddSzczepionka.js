@@ -1,4 +1,4 @@
-import Header from './Header';
+import Header from "./Header/Header";
 import axios from "axios";
 import React from "react";
 
@@ -39,8 +39,8 @@ function AddSzczepionka() {
 
   return (
     <div className="AddSzczepionka">
-      <h1>Dodaj szczepionkę</h1>
       <Header></Header>
+      <h1>Dodaj szczepionkę</h1>
 
       <form onSubmit={handleSubmit}>
         <label> Nazwa szczepionki:
