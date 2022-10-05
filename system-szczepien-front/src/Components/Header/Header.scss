@@ -7,10 +7,11 @@ body {
   background-color: #555;
   overflow: auto;
   margin-bottom: 20px;
+  display: flex;
+  justify-content: space-around
 }
 
 .navbar a {
-  float: left;
   padding: 12px;
   color: white;
   text-decoration: none;
@@ -31,3 +32,7 @@ body {
     display: block;
   }
 }
+
+// .logoutBtn{
+ 
+// }
