@@ -25,7 +25,10 @@ const PatientProfile= () => {
   return (
     <div className="PatientProfile">
         <Header></Header>
-        <h1 className='PatientProfile--header'>Witaj na swoim profilu  {patientData.first_name}</h1>
+        <h1 className='PatientProfile--header'>Witaj na swoim profilu  {patientData.username}</h1>
+
+        <h3>Imię {patientData.first_name}</h3>
+        <h3>Nazwisko {patientData.last_name}</h3>
     </div>
   );
 }
