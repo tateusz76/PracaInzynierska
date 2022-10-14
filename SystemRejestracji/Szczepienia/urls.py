@@ -12,6 +12,8 @@ urlpatterns = [
     path('szczepienie/<int:pk>', views.SzczepienieDetail.as_view(), name='szczepienie-details'),
     path('zaszczepiony', views.ZaszczepionyList.as_view(), name='zaszczepiony-list'),
     path('zaszczepiony/<int:pk>', views.ZaszczepionyDetail.as_view(), name='zaszczepiony-details'),
+    path('punkt', views.PunktList.as_view(), name='punkt-list'),
+    path('punkt/<int:pk>', views.PunktDetail.as_view(), name='punkt-details'),
     #path('', views.ApiRoot.as_view(), name=views.ApiRoot.name),
     path('', include('djoser.urls')),
     path('', include('djoser.urls.authtoken')),
