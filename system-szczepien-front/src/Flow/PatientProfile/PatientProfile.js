@@ -1,23 +1,36 @@
-import React, { useEffect, useState } from 'react';
+import axios from "axios";
+import React from "react";
+import Header from "../../Components/Header/Header";
+import { useEffect, useState } from 'react';
+import requests from "../../Requests";
 
 
-const PatientProfile = () => {
+const PatientProfile= () => {
 
+  const [patientData, setPatientData] = useState({});
 
-    return (
-        <div className='PatientProfile--main'>
+  useEffect(() => {
+    axios.get(requests.patientProfileGet , {
+        headers: {
+          Authorization: 'Bearer ' + localStorage.getItem("access")
+        }
+      })
+      .then(function (response) {
+        console.log(response.data);
+        setPatientData(response.data[0]);
+      })
+    }, []);
+      
 
-        <h1 className='PatientProfile--header'>NAME's profile</h1>
-        <h2 className='PatientProfile--h2'>Andrzej</h2>   
-        <h2 className='PatientProfile--h2'>Testowy</h2>
-        <h2 className='PatientProfile--h2'>123456789</h2>   
-        <h2 className='PatientProfile--h2'>Moderna</h2>
-        
-        </div>
-    )
+  return (
+    <div className="PatientProfile">
+        <Header></Header>
+        <h1 className='PatientProfile--header'>Witaj na swoim profilu  {patientData.username}</h1>
 
+        <h3>Imię {patientData.first_name}</h3>
+        <h3>Nazwisko {patientData.last_name}</h3>
+    </div>
+  );
 }
-
-
 
 export default PatientProfile;

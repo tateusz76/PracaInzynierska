@@ -1,4 +1,4 @@
-import Header from './Header';
+import Header from "./Header/Header";
 import axios from "axios";
 import React from "react";
 
@@ -6,8 +6,8 @@ import React from "react";
 function MainPage() {
   return (
     <div className="AddSzczepionka">
-      <h1>Main Page</h1>
       <Header></Header>
+      <h1>Main Page</h1>
     </div>
   );
 }

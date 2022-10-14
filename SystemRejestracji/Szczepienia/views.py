@@ -53,6 +53,15 @@ class ZaszczepionyDetail(generics.RetrieveUpdateDestroyAPIView):
     name = 'zaszczepiony-details'
 
 
+class PunktList(generics.ListCreateAPIView):
+    queryset = Punkt.objects.all()
+    serializer_class = PunktSerializer
+    name = 'punkt-list'
+
+class PunktDetail(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Punkt.objects.all()
+    serializer_class = PunktSerializer
+    name = 'punkt-details'
 
 
 class ApiRoot(generics.GenericAPIView):
@@ -63,4 +72,5 @@ class ApiRoot(generics.GenericAPIView):
                          'szczepionki': reverse(SzczepionkaList.name, request=request),
                          'szczepienia': reverse(SzczepienieList.name, request=request),
                          'zaszczepiony': reverse(ZaszczepionyList.name, request=request),
+                         'punkt': reverse(PunktList.name, request=request),
                          })

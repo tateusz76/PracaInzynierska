@@ -47,10 +47,24 @@ class Pacjent(AbstractUser):
         verbose_name_plural = "Pacjenci"
 
 
+class Punkt(models.Model):
+    nazwa = models.TextField(max_length=80, unique=True)
+    miasto = models.TextField(max_length=80, unique=True)
+    ulica = models.TextField(max_length=80, unique=True)
+    numer = models.TextField(max_length=80, unique=True)
+
+    def __str__(self):
+        return str(self.nazwa) + ' ' + str(self.miasto) + ' ' + str(self.ulica) + ' ' + str(self.numer)
+
+    class Meta:
+        verbose_name_plural = "Punkty szczepień"
+
+
 class Szczepienie(models.Model):
     pacjent = models.ForeignKey(Pacjent, related_name='szczepionyKto', on_delete=models.DO_NOTHING, default = 0)
     dataSzczepienia = models.DateField(default= datetime.now, blank=True)
     szczepionka = models.ForeignKey(Szczepionka, related_name='szczepionki', on_delete=models.DO_NOTHING, default='')
+    punkt = models.ForeignKey(Punkt, related_name='punkty', on_delete=models.DO_NOTHING, default='')
     czyOstatniaDawka = models.BooleanField(default=False)
 
     def __str__(self):
@@ -58,3 +72,5 @@ class Szczepienie(models.Model):
 
     class Meta:
         verbose_name_plural = "Szczepienia"
+
+

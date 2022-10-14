@@ -5,7 +5,7 @@ import PatientProfile from '../PatientProfile/PatientProfile';
 const PatientFlow = () => {
 
     return (
-        <div className='clientFlow'>
+        <div className='patientFlow'>
             <Routes >
                 <Route path="*" element={<PatientProfile />} />
                 <Route path='/' element={<PatientProfile />} />

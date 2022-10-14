@@ -1,7 +1,7 @@
 import './Login.css'
 import { useContext, useState } from 'react';
-import { Link } from 'react-router-dom';
-import Header from '../../Components/Header';
+import { Link, Navigate } from 'react-router-dom';
+import Header from '../../Components/Header/Header';
 import axios from "axios";
 import React from "react";
 
@@ -10,6 +10,13 @@ function Login() {
   const [formValue, setformValue] = React.useState({
     email: '',
     password: '',
+  });
+
+  //CZY ZALOGOWANY
+  const [isAuthenticated, setAuthenticated] = useState(() => {
+    const token = localStorage.getItem("access");
+    if(token !== null) console.log("zalogowany")
+    else console.log("wylogowany")
   });
 
   const handleSubmit = async(e) => {
@@ -32,6 +39,7 @@ function Login() {
     } catch(error) {
       console.log(error)
     }
+
   }
 
   const handleChange = (event) => {
@@ -44,8 +52,8 @@ function Login() {
     
   return (
     <div className="Login">
-    <h1>Zaloguj się</h1>
     <Header></Header>
+    <h1>Zaloguj się</h1>
 
     <form onSubmit={handleSubmit}>
       <label> Adres email:
@@ -54,8 +62,9 @@ function Login() {
       <label> Hasło:
         <input type="password" name="password"  onChange={handleChange}/>
       </label>
-      <input type="submit" value="Wyślij" />
+      <input type="submit" className='submitbtn' value="Wyślij" />
     </form>
+    Nie jesteś zarejestrowanym pacjentem? <a href="/register"><i className="fa fa-fw fa-user"></i>Zarejestruj się</a>
   </div>
     )
 }
