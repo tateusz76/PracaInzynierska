@@ -5,6 +5,9 @@ from rest_framework import generics, permissions, status
 from rest_framework.response import Response
 from rest_framework.reverse import reverse
 from rest_framework import permissions
+from rest_framework.permissions import AllowAny, IsAdminUser
+from rest_framework.permissions import IsAuthenticated
+from .permissions import IsOwnerOrReadOnly
 
 # Create your views here.
 
@@ -23,23 +26,36 @@ from rest_framework import permissions
 class SzczepionkaList(generics.ListCreateAPIView):
     queryset = Szczepionka.objects.all()
     serializer_class = SzczepionkaSerializer
+    permission_classes = (IsAuthenticated, IsAdminUser)
     name = 'szczepionka-list'
 
 class SzczepionkaDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Szczepionka.objects.all()
     serializer_class = SzczepionkaSerializer
+    permission_classes = (IsAuthenticated,IsAdminUser)
     name = 'szczepionka-details'
 
 
 class SzczepienieList(generics.ListCreateAPIView):
-    queryset = Szczepienie.objects.all()
     serializer_class = SzczepienieSerializer
+    permission_classes = [permissions.IsAuthenticated,
+                          IsOwnerOrReadOnly]
     name = 'szczepienie-list'
 
+    def get_queryset(self):
+        user = self.request.user
+        return Szczepienie.objects.filter(pacjent=user)
+
+
 class SzczepienieDetail(generics.RetrieveUpdateDestroyAPIView):
-    queryset = Szczepienie.objects.all()
     serializer_class = SzczepienieSerializer
+    permission_classes = [permissions.IsAuthenticated,
+                          IsOwnerOrReadOnly]
     name = 'szczepienie-details'
+
+    def get_queryset(self):
+        user = self.request.user
+        return Szczepienie.objects.filter(pacjent=user)
 
 
 class ZaszczepionyList(generics.ListCreateAPIView):
@@ -56,11 +72,13 @@ class ZaszczepionyDetail(generics.RetrieveUpdateDestroyAPIView):
 class PunktList(generics.ListCreateAPIView):
     queryset = Punkt.objects.all()
     serializer_class = PunktSerializer
+    permission_classes = (IsAuthenticated, IsAdminUser)
     name = 'punkt-list'
 
 class PunktDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Punkt.objects.all()
     serializer_class = PunktSerializer
+    permission_classes = (IsAuthenticated, IsAdminUser)
     name = 'punkt-details'
 
 

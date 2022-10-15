@@ -21,6 +21,7 @@ class SzczepienieSerializer(serializers.HyperlinkedModelSerializer):
     szczepionka = serializers.SlugRelatedField(queryset=Szczepionka.objects.all(), slug_field='nazwaSzczepionki')
     punkt = serializers.SlugRelatedField(queryset=Punkt.objects.all(), slug_field='nazwa')
 
+
     class Meta:
         model = Szczepienie
         fields = ['id', 'pacjent', 'dataSzczepienia', 'szczepionka', 'punkt', 'czyOstatniaDawka']
