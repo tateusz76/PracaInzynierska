@@ -23,6 +23,15 @@ from .permissions import IsOwnerOrReadOnly
 #     name = 'pacjent-details'
 
 
+class PatientProfileEdit(generics.UpdateAPIView):
+    serializer_class = PatientEditProfileSerializer
+    permission_classes = [permissions.IsAuthenticated,]
+
+    def get_object(self, *args, **kwargs):
+        user = Pacjent.objects.get(id=self.request.user.id)
+        return user
+
+
 class SzczepionkaList(generics.ListCreateAPIView):
     queryset = Szczepionka.objects.all()
     serializer_class = SzczepionkaSerializer
@@ -91,4 +100,5 @@ class ApiRoot(generics.GenericAPIView):
                          'szczepienia': reverse(SzczepienieList.name, request=request),
                          'zaszczepiony': reverse(ZaszczepionyList.name, request=request),
                          'punkt': reverse(PunktList.name, request=request),
+                         'edit': reverse(PatientProfileEdit.name, request=request),
                          })

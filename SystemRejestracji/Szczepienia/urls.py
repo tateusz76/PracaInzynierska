@@ -17,4 +17,6 @@ urlpatterns = [
     #path('', views.ApiRoot.as_view(), name=views.ApiRoot.name),
     path('', include('djoser.urls')),
     path('', include('djoser.urls.authtoken')),
+
+    path('edit', views.PatientProfileEdit.as_view(), name='edit-profile'),
 ]
