@@ -30,7 +30,8 @@ class Zaszczepiony(models.Model):
 class Pacjent(AbstractUser):
     email = models.EmailField(max_length=45, unique=True)
     pesel = models.TextField(max_length=11, unique=True)
-    REQUIRED_FIELDS = ['username', 'first_name', 'last_name', 'pesel']
+    is_staff = models.BooleanField(default=False)
+    REQUIRED_FIELDS = ['username', 'first_name', 'last_name', 'pesel', 'is_staff']
     USERNAME_FIELD = 'email'
 
     def get_username(self):
@@ -39,9 +40,9 @@ class Pacjent(AbstractUser):
     def __str__(self):
         return self.first_name + ' ' + self.last_name
 
-    def delete(self, *args, **kwargs):
-        Zaszczepiony.objects.create(imie=self.first_name, nazwisko=self.last_name, pesel = self.pesel)
-        super().delete(*args, **kwargs)
+    # def delete(self, *args, **kwargs):
+    #     Zaszczepiony.objects.create(imie=self.first_name, nazwisko=self.last_name, pesel = self.pesel)
+    #     super().delete(*args, **kwargs)
 
     class Meta:
         verbose_name_plural = "Pacjenci"
@@ -62,7 +63,7 @@ class Punkt(models.Model):
 
 class Szczepienie(models.Model):
     pacjent = models.ForeignKey(Pacjent, related_name='szczepionyKto', on_delete=models.DO_NOTHING, default = 0)
-    dataSzczepienia = models.DateField(default= datetime.now, blank=True)
+    dataSzczepienia = models.DateField()
     szczepionka = models.ForeignKey(Szczepionka, related_name='szczepionki', on_delete=models.DO_NOTHING, default='')
     punkt = models.ForeignKey(Punkt, related_name='punkty', on_delete=models.DO_NOTHING, default='')
     czyOstatniaDawka = models.BooleanField(default=False)

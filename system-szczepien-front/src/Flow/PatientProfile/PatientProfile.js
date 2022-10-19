@@ -3,6 +3,7 @@ import React from "react";
 import Header from "../../Components/Header/Header";
 import { useEffect, useState } from 'react';
 import requests from "../../Requests";
+import { Link, Navigate } from 'react-router-dom';
 
 
 const PatientProfile= () => {
@@ -29,6 +30,8 @@ const PatientProfile= () => {
 
         <h3>Imię {patientData.first_name}</h3>
         <h3>Nazwisko {patientData.last_name}</h3>
+
+        <Link  to='/patientEditProfile' className='navLink'><h2>Edytuj profil</h2></Link>
     </div>
   );
 }

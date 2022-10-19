@@ -9,6 +9,23 @@ class PacjentSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 
+class PatientEditProfileSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Pacjent
+        fields = (
+            'first_name',
+            'last_name',
+            'username',
+
+        )
+        extra_kwargs = {
+            'first_name': {'required': False},
+            'last_name': {'required': False},
+            'username': {'required': False},
+        }
+
+
 class SzczepionkaSerializer(serializers.HyperlinkedModelSerializer):
 
     class Meta:
@@ -20,6 +37,7 @@ class SzczepienieSerializer(serializers.HyperlinkedModelSerializer):
     pacjent = serializers.SlugRelatedField(queryset=Pacjent.objects.all(), slug_field='id')
     szczepionka = serializers.SlugRelatedField(queryset=Szczepionka.objects.all(), slug_field='nazwaSzczepionki')
     punkt = serializers.SlugRelatedField(queryset=Punkt.objects.all(), slug_field='nazwa')
+
 
     class Meta:
         model = Szczepienie
