@@ -7,7 +7,7 @@ from rest_framework.reverse import reverse
 from rest_framework import permissions
 from rest_framework.permissions import AllowAny, IsAdminUser
 from rest_framework.permissions import IsAuthenticated
-from .permissions import IsOwnerOrReadOnly
+from .permissions import *
 
 # Create your views here.
 
@@ -35,13 +35,15 @@ class PatientProfileEdit(generics.UpdateAPIView):
 class SzczepionkaList(generics.ListCreateAPIView):
     queryset = Szczepionka.objects.all()
     serializer_class = SzczepionkaSerializer
-    permission_classes = (IsAuthenticated, IsAdminUser)
+    permission_classes = [permissions.IsAuthenticated,
+                          IsAdminUser]
     name = 'szczepionka-list'
 
 class SzczepionkaDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Szczepionka.objects.all()
     serializer_class = SzczepionkaSerializer
-    permission_classes = (IsAuthenticated,IsAdminUser)
+    permission_classes = [permissions.IsAuthenticated,
+                          IsAdminUser]
     name = 'szczepionka-details'
 
 
@@ -67,15 +69,15 @@ class SzczepienieDetail(generics.RetrieveUpdateDestroyAPIView):
         return Szczepienie.objects.filter(pacjent=user)
 
 
-class ZaszczepionyList(generics.ListCreateAPIView):
-    queryset = Zaszczepiony.objects.all()
-    serializer_class = ZaszczepionySerializer
-    name = 'zaszczepiony-list'
-
-class ZaszczepionyDetail(generics.RetrieveUpdateDestroyAPIView):
-    queryset = Zaszczepiony.objects.all()
-    serializer_class = ZaszczepionySerializer
-    name = 'zaszczepiony-details'
+# class ZaszczepionyList(generics.ListCreateAPIView):
+#     queryset = Zaszczepiony.objects.all()
+#     serializer_class = ZaszczepionySerializer
+#     name = 'zaszczepiony-list'
+#
+# class ZaszczepionyDetail(generics.RetrieveUpdateDestroyAPIView):
+#     queryset = Zaszczepiony.objects.all()
+#     serializer_class = ZaszczepionySerializer
+#     name = 'zaszczepiony-details'
 
 
 class PunktList(generics.ListCreateAPIView):
@@ -98,7 +100,7 @@ class ApiRoot(generics.GenericAPIView):
         return Response({#'pacjenci': reverse(PacjentList.name, request=request),
                          'szczepionki': reverse(SzczepionkaList.name, request=request),
                          'szczepienia': reverse(SzczepienieList.name, request=request),
-                         'zaszczepiony': reverse(ZaszczepionyList.name, request=request),
+                         # 'zaszczepiony': reverse(ZaszczepionyList.name, request=request),
                          'punkt': reverse(PunktList.name, request=request),
                          'edit': reverse(PatientProfileEdit.name, request=request),
                          })

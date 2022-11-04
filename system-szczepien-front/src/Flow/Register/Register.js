@@ -19,7 +19,6 @@ function Register() {
     registerData.append("username", formValue.username)
     registerData.append("first_name", formValue.first_name)
     registerData.append("last_name", formValue.last_name)
-    registerData.append("pesel", formValue.pesel)
     registerData.append("email", formValue.email)
     registerData.append("password", formValue.password)
 
@@ -60,10 +59,6 @@ function Register() {
 
       <label> Nazwisko:
         <input type="text" name="last_name"  onChange={handleChange}/>
-      </label>
-
-      <label> Numer PESEL:
-        <input type="text" name="pesel"  onChange={handleChange}/>
       </label>
 
       <label> Adres Email:

@@ -1,6 +1,6 @@
 import './Login.css'
 import { useContext, useState } from 'react';
-import { Link, Navigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import Header from '../../Components/Header/Header';
 import axios from "axios";
 import React from "react";
@@ -11,6 +11,8 @@ function Login() {
     email: '',
     password: '',
   });
+
+  const navigate = useNavigate();
 
   //CZY ZALOGOWANY
   const [isAuthenticated, setAuthenticated] = useState(() => {
@@ -35,6 +37,7 @@ function Login() {
       .then((res) => {     
         localStorage["access"]=res.data.access
         localStorage["refresh"]=res.data.refresh
+        navigate('/patientProfile');
   });
     } catch(error) {
       console.log(error)
@@ -62,9 +65,10 @@ function Login() {
       <label> Hasło:
         <input type="password" name="password"  onChange={handleChange}/>
       </label>
-      <input type="submit" className='submitbtn' value="Wyślij" />
+        <input type="submit" className='submitbtn' value="Wyślij" />
     </form>
-    Nie jesteś zarejestrowanym pacjentem? <a href="/register"><i className="fa fa-fw fa-user"></i>Zarejestruj się</a>
+
+    Nie jesteś zarejestrowanym pacjentem? <Link  to='/register'><i className="fa fa-fw fa-user"></i>Zarejestruj się</Link>
   </div>
     )
 }

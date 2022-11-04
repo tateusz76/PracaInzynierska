@@ -15,23 +15,22 @@ class Szczepionka(models.Model):
         verbose_name_plural = "Szczepionki"
 
 
-class Zaszczepiony(models.Model):
-    imie = models.CharField(max_length=45)
-    nazwisko = models.CharField(max_length=45)
-    pesel = models.CharField(max_length=11, unique=True)
-
-    def __str__(self):
-        return self.imie + ' ' + self.nazwisko
-
-    class Meta:
-        verbose_name_plural = "Zaszczepieni"
+# class Zaszczepiony(models.Model):
+#     imie = models.CharField(max_length=45)
+#     nazwisko = models.CharField(max_length=45)
+#     pesel = models.CharField(max_length=11, unique=True)
+#
+#     def __str__(self):
+#         return self.imie + ' ' + self.nazwisko
+#
+#     class Meta:
+#         verbose_name_plural = "Zaszczepieni"
 
 
 class Pacjent(AbstractUser):
     email = models.EmailField(max_length=45, unique=True)
-    pesel = models.TextField(max_length=11, unique=True)
     is_staff = models.BooleanField(default=False)
-    REQUIRED_FIELDS = ['username', 'first_name', 'last_name', 'pesel', 'is_staff']
+    REQUIRED_FIELDS = ['username', 'first_name', 'last_name', 'is_staff']
     USERNAME_FIELD = 'email'
 
     def get_username(self):
@@ -49,10 +48,10 @@ class Pacjent(AbstractUser):
 
 
 class Punkt(models.Model):
-    nazwa = models.TextField(max_length=80, unique=True)
-    miasto = models.TextField(max_length=80, unique=True)
-    ulica = models.TextField(max_length=80, unique=True)
-    numer = models.TextField(max_length=80, unique=True)
+    nazwa = models.TextField(max_length=80)
+    miasto = models.TextField(max_length=80)
+    ulica = models.TextField(max_length=80)
+    numer = models.TextField(max_length=80)
 
     def __str__(self):
         return str(self.nazwa) + ' ' + str(self.miasto) + ' ' + str(self.ulica) + ' ' + str(self.numer)
