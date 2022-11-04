@@ -35,13 +35,15 @@ class PatientProfileEdit(generics.UpdateAPIView):
 class SzczepionkaList(generics.ListCreateAPIView):
     queryset = Szczepionka.objects.all()
     serializer_class = SzczepionkaSerializer
-    permission_classes = (IsAuthenticated, IsAdminUser)
+    permission_classes = [permissions.IsAuthenticated,
+                          IsAdminUser]
     name = 'szczepionka-list'
 
 class SzczepionkaDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Szczepionka.objects.all()
     serializer_class = SzczepionkaSerializer
-    permission_classes = (IsAuthenticated,IsAdminUser)
+    permission_classes = [permissions.IsAuthenticated,
+                          IsAdminUser]
     name = 'szczepionka-details'
 
 
