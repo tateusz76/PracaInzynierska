@@ -14,14 +14,10 @@ class PatientEditProfileSerializer(serializers.ModelSerializer):
     class Meta:
         model = Pacjent
         fields = (
-            'first_name',
-            'last_name',
             'username',
 
         )
         extra_kwargs = {
-            'first_name': {'required': False},
-            'last_name': {'required': False},
             'username': {'required': False},
         }
 

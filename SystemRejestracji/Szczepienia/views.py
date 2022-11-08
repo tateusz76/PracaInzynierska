@@ -83,7 +83,7 @@ class SzczepienieDetail(generics.RetrieveUpdateDestroyAPIView):
 class PunktList(generics.ListCreateAPIView):
     queryset = Punkt.objects.all()
     serializer_class = PunktSerializer
-    permission_classes = (IsAuthenticated, IsAdminUser)
+    permission_classes = (AllowAny,)
     name = 'punkt-list'
 
 class PunktDetail(generics.RetrieveUpdateDestroyAPIView):

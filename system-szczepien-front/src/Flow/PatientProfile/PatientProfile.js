@@ -31,7 +31,7 @@ const PatientProfile= () => {
         <h3>Imię {patientData.first_name}</h3>
         <h3>Nazwisko {patientData.last_name}</h3>
 
-        <Link  to='/patientEditProfile' className='navLink'><h2>Edytuj profil</h2></Link>
+        <Link  to='/patientEditProfile' className='navLink'><h2>Zmień nazwę użytkownika</h2></Link>
     </div>
   );
 }
