@@ -30,7 +30,7 @@ class SzczepionkaSerializer(serializers.HyperlinkedModelSerializer):
 
 
 class SzczepienieSerializer(serializers.HyperlinkedModelSerializer):
-    pacjent = serializers.SlugRelatedField(queryset=Pacjent.objects.all(), slug_field='id')
+    pacjent = serializers.SlugRelatedField(queryset=Pacjent.objects.all(), slug_field='username')
     szczepionka = serializers.SlugRelatedField(queryset=Szczepionka.objects.all(), slug_field='nazwaSzczepionki')
     punkt = serializers.SlugRelatedField(queryset=Punkt.objects.all(), slug_field='nazwa')
 
