@@ -8,6 +8,7 @@ from rest_framework.permissions import AllowAny, IsAdminUser
 from rest_framework.permissions import IsAuthenticated
 from Szczepienia.permissions import IsOwnerOrReadOnly
 from django.shortcuts import get_list_or_404, get_object_or_404
+import Szczepienia
 
 # Create your views here.
 
@@ -49,7 +50,7 @@ class SzczepionkaDetail(generics.RetrieveUpdateDestroyAPIView):
 
 class SzczepienieList(generics.ListCreateAPIView):
     serializer_class = SzczepienieSerializer
-    permission_classes = [IsAuthenticated, IsOwnerOrReadOnly]
+    permission_classes = [Szczepienia.permissions.IsOwnerOrReadOnly]
 
     name = 'szczepienie-list'
 
@@ -65,7 +66,7 @@ class SzczepienieList(generics.ListCreateAPIView):
 
 class SzczepienieDetail(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = SzczepienieSerializer
-    permission_classes = [IsAuthenticated, IsOwnerOrReadOnly]
+    permission_classes = [Szczepienia.permissions.IsOwnerOrReadOnly]
 
     name = 'szczepienie-details'
 
