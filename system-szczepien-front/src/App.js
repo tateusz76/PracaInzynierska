@@ -9,6 +9,9 @@ import Register from './Flow/Register/Register';
 import Logout from './Flow/Login/Logout';
 import PatientProfile from './Flow/PatientProfile/PatientProfile';
 import PatientEditProfile from './Flow/PatientProfile/PatientProfileEdit/PatientProfileEdit';
+import Punkt from './Components/Punkt/Punkt';
+import Szczepienie from './Flow/SzczepienieFlow/Szczepienie';
+
 
 
 function App() {
@@ -23,6 +26,8 @@ function App() {
             <Route exact path="logout" element={<Logout/>} />
             <Route exact path="patientProfile" element={<PatientProfile/>} />
             <Route exact path="patientEditProfile" element={<PatientEditProfile/>} />
+            <Route exact path="punkt" element={<Punkt/>} />
+            <Route exact path="rejestracjaSzczepienie" element={<Szczepienie/>} />
       </Routes>
     </div>
   );

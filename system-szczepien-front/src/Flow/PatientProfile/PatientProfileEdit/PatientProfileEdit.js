@@ -7,16 +7,12 @@ import requests from "../../../Requests";
 const PatientEditProfile= () => {
 
     const [formValue, setformValue] = React.useState({
-        firstName: '',
-        lastName: '',
         username: '',
       });
 
       const handleSubmit = async(e) => {
         e.preventDefault();
         const userData = new FormData();
-        userData.append("firstName", formValue.firstName)
-        userData.append("lastName", formValue.lastName)
         userData.append("username", formValue.username)
     
         try {
@@ -46,12 +42,6 @@ const PatientEditProfile= () => {
         <h1 className='PatientEditProfile--header'>Edycja profilu</h1>
 
         <form onSubmit={handleSubmit}>
-            <label> Imię:
-                <input type="text" name="firstName"  onChange={handleChange}/>
-            </label>
-            <label> Nazwisko:
-                <input type="text" name="lastName"  onChange={handleChange}/>
-            </label>
             <label> Nazwa użytkownika:
                 <input type="text" name="username"  onChange={handleChange}/>
             </label>

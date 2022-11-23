@@ -1,13 +1,14 @@
 from django.shortcuts import render
 from .models import *
+import Szczepienia
 from .serializers import *
 from rest_framework import generics, permissions, status
 from rest_framework.response import Response
 from rest_framework.reverse import reverse
-from rest_framework import permissions
 from rest_framework.permissions import AllowAny, IsAdminUser
 from rest_framework.permissions import IsAuthenticated
-from .permissions import *
+from Szczepienia.permissions import IsOwnedByUser
+from django.shortcuts import get_list_or_404, get_object_or_404
 
 # Create your views here.
 
@@ -35,23 +36,26 @@ class PatientProfileEdit(generics.UpdateAPIView):
 class SzczepionkaList(generics.ListCreateAPIView):
     queryset = Szczepionka.objects.all()
     serializer_class = SzczepionkaSerializer
-    permission_classes = [permissions.IsAuthenticated,
+    permission_classes = [IsAuthenticated,
                           IsAdminUser]
     name = 'szczepionka-list'
 
 class SzczepionkaDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Szczepionka.objects.all()
     serializer_class = SzczepionkaSerializer
-    permission_classes = [permissions.IsAuthenticated,
+    permission_classes = [IsAuthenticated,
                           IsAdminUser]
     name = 'szczepionka-details'
 
 
 class SzczepienieList(generics.ListCreateAPIView):
     serializer_class = SzczepienieSerializer
-    permission_classes = [permissions.IsAuthenticated,
-                          IsOwnerOrReadOnly]
+    permission_classes = (permissions.IsAuthenticated, IsOwnedByUser)
+
     name = 'szczepienie-list'
+
+    def perform_create(self, serializer):
+        serializer.save(pacjent=self.request.user)
 
     def get_queryset(self):
         user = self.request.user
@@ -60,13 +64,18 @@ class SzczepienieList(generics.ListCreateAPIView):
 
 class SzczepienieDetail(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = SzczepienieSerializer
-    permission_classes = [permissions.IsAuthenticated,
-                          IsOwnerOrReadOnly]
+    permission_classes = (permissions.IsAuthenticated, IsOwnedByUser)
+
     name = 'szczepienie-details'
 
     def get_queryset(self):
         user = self.request.user
         return Szczepienie.objects.filter(pacjent=user)
+
+    def get_object(self):
+        obj = get_object_or_404(self.get_queryset(), pk=self.kwargs["pk"])
+        self.check_object_permissions(self.request, obj)
+        return obj
 
 
 # class ZaszczepionyList(generics.ListCreateAPIView):
@@ -83,7 +92,7 @@ class SzczepienieDetail(generics.RetrieveUpdateDestroyAPIView):
 class PunktList(generics.ListCreateAPIView):
     queryset = Punkt.objects.all()
     serializer_class = PunktSerializer
-    permission_classes = (IsAuthenticated, IsAdminUser)
+    permission_classes = (AllowAny,)
     name = 'punkt-list'
 
 class PunktDetail(generics.RetrieveUpdateDestroyAPIView):
