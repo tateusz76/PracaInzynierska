@@ -4,13 +4,15 @@ import Header from '../../Components/Header/Header';
 import axios from "axios";
 import React from "react";
 import requests from '../../Requests';
+import './Szczepienie.css';
+import instance from '../../Axios';
 
 const Szczepienie = () => {
 
     const [patientData, setPatientData] = useState({});
 
     useEffect(() => {
-      axios.get(requests.patientProfileGet , {
+      instance.get(requests.patientProfileGet , {
           headers: {
             Authorization: 'Bearer ' + localStorage.getItem("access")
           }
@@ -61,23 +63,25 @@ const Szczepienie = () => {
 
     
   return (
-    <div className="szczepienieRegister">
-    <Header></Header>
-    <h1>Zarejestruj się na szczepienie</h1>
+    <div className="szczepienie">
+      <Header></Header>
+      <div className="szczepienieRegister">
+        <h1>Zarejestruj się na szczepienie</h1>
 
-    <form onSubmit={handleSubmit}>
-      <label> Data szczepienia:
-        <input type="date" name="dataSzczepienia"  onChange={handleChange}/>
-      </label>
-      <label> Szczepionka:
-        <input type="text" name="szczepionka"  onChange={handleChange}/>
-      </label>
-      <label> Punkt Szczepień:
-        <input type="text" name="punkt"  onChange={handleChange}/>
-      </label>
-        <input type="submit" className='submitbtn' value="Wyślij" />
-    </form>
-  </div>
+        <form className='szczepienieForm' onSubmit={handleSubmit}>
+          <label> Data szczepienia:
+            <input type="date" name="dataSzczepienia"  onChange={handleChange}/>
+          </label>
+          <label> Szczepionka:
+            <input type="text" name="szczepionka"  onChange={handleChange}/>
+          </label>
+          <label> Punkt Szczepień:
+            <input type="text" name="punkt"  onChange={handleChange}/>
+          </label>
+            <input type="submit" className='submitbtn' value="Wyślij" />
+        </form>
+      </div>
+    </div>
     )
 }
 

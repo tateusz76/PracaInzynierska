@@ -4,6 +4,8 @@ import { Link, useNavigate } from 'react-router-dom';
 import Header from '../../Components/Header/Header';
 import axios from "axios";
 import React from "react";
+import './Login.css';
+import instance from '../../Axios';
 
 function Login() {
 
@@ -28,7 +30,7 @@ function Login() {
     loginData.append("password", formValue.password)
 
     try {
-      const response = await axios({
+      const response = await instance({
         method: "post",
         url: "http://127.0.0.1:8000/szczepienia/token/",
         data: loginData,
@@ -55,10 +57,9 @@ function Login() {
     
   return (
     <div className="Login">
-    <Header></Header>
     <h1>Zaloguj się</h1>
 
-    <form onSubmit={handleSubmit}>
+    <form className='loginForm' onSubmit={handleSubmit}>
       <label> Adres email:
         <input type="text" name="email"  onChange={handleChange}/>
       </label>
@@ -68,7 +69,7 @@ function Login() {
         <input type="submit" className='submitbtn' value="Wyślij" />
     </form>
 
-    Nie jesteś zarejestrowanym pacjentem? <Link  to='/register'><i className="fa fa-fw fa-user"></i>Zarejestruj się</Link>
+    <p>Nie jesteś zarejestrowanym pacjentem?</p><Link  to='/register'><i className="fa fa-fw fa-user"></i>Zarejestruj się</Link>
   </div>
     )
 }

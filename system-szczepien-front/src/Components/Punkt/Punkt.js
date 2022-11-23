@@ -25,7 +25,7 @@ const Punkt= () => {
   return (
     <div className="Punkt">
         <Header></Header>
-        <p className='punktNazwa'>{nazwa}</p>
+        <p className='punktNazwa'></p>
         {punktList}
     </div>
   );

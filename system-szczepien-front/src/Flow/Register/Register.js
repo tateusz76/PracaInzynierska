@@ -3,6 +3,7 @@ import axios from "axios";
 import React from "react";
 import "./Register.css"
 import { Link, useNavigate } from 'react-router-dom';
+import instance from '../../Axios';
 
 function Register() {
 
@@ -23,12 +24,14 @@ function Register() {
     registerData.append("password", formValue.password)
 
     try {
-      const response = await axios({
+      const response = await instance({
         method: "post",
         url: "http://127.0.0.1:8000/szczepienia/users/",
         data: registerData,
         headers: { "Content-Type": "application/json" },
-      })
+      }).then(() => {     
+        navigate('/login');
+  });
     } catch(error) {
       console.log(error)
     }
@@ -44,7 +47,7 @@ function Register() {
     
   return (
     <div className="Register">
-    <Header></Header>
+    {/* <Header></Header> */}
     <h1>Zaloguj się</h1>
 
     <form className='RegisterForm' onSubmit={handleSubmit}>

@@ -2,6 +2,7 @@ import axios from "axios";
 import React from "react";
 import Header from "../../../Components/Header/Header";
 import requests from "../../../Requests";
+import instance from '../../../Axios';
 
 
 const PatientEditProfile= () => {
@@ -16,7 +17,7 @@ const PatientEditProfile= () => {
         userData.append("username", formValue.username)
     
         try {
-          const response = await axios({
+          const response = await instance({
             method: "put",
             url: requests.editPatientProfile,
             data: userData,
