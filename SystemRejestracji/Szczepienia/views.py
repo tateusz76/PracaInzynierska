@@ -92,7 +92,7 @@ class SzczepienieDetail(generics.RetrieveUpdateDestroyAPIView):
 class PunktList(generics.ListCreateAPIView):
     queryset = Punkt.objects.all()
     serializer_class = PunktSerializer
-    permission_classes = (AllowAny,)
+    permission_classes = (IsAuthenticated,)
     name = 'punkt-list'
 
 class PunktDetail(generics.RetrieveUpdateDestroyAPIView):
@@ -100,6 +100,13 @@ class PunktDetail(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = PunktSerializer
     permission_classes = (IsAuthenticated, IsAdminUser)
     name = 'punkt-details'
+
+
+class GetPunkty(generics.ListAPIView):
+    queryset = Punkt.objects.all()
+    serializer_class = PunktSerializer
+    permission_classes = (IsAuthenticated,)
+    name = 'punkt-get'
 
 
 class ApiRoot(generics.GenericAPIView):
@@ -112,4 +119,5 @@ class ApiRoot(generics.GenericAPIView):
                          # 'zaszczepiony': reverse(ZaszczepionyList.name, request=request),
                          'punkt': reverse(PunktList.name, request=request),
                          'edit': reverse(PatientProfileEdit.name, request=request),
+                         'getPunkty': reverse(GetPunkty.name, request=request),
                          })

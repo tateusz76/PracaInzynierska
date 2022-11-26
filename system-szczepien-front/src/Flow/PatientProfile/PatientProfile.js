@@ -19,11 +19,12 @@ const PatientProfile= () => {
         }
       })
       .then(function (response) {
-        console.log(response.data);
+        //console.log(response.data);
         setPatientData(response.data[0]);
       })
     }, []);
       
+    //console.log(patientData);
 
   return (
     <div className="PatientProfile">

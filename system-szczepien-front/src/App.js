@@ -10,7 +10,7 @@ import Register from './Flow/Register/Register';
 import Logout from './Flow/Login/Logout';
 import PatientProfile from './Flow/PatientProfile/PatientProfile';
 import PatientEditProfile from './Flow/PatientProfile/PatientProfileEdit/PatientProfileEdit';
-import Punkt from './Components/Punkt/Punkt';
+import Punkt from './Flow/Punkty/Punkt';
 import Szczepienie from './Flow/SzczepienieFlow/Szczepienie';
 
 
@@ -26,7 +26,7 @@ function App() {
     {
       isLoggedIn = false;
     }
-    console.log(isLoggedIn);
+   //console.log(isLoggedIn);
 
   return (
     <div className="App">
