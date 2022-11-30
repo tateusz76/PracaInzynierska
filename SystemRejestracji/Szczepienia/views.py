@@ -109,6 +109,24 @@ class GetPunkty(generics.ListAPIView):
     name = 'punkt-get'
 
 
+class GetPunktyDetail(generics.RetrieveAPIView):
+    queryset = Punkt.objects.all()
+    serializer_class = PunktSerializer
+    permission_classes = (IsAuthenticated,)
+    name = 'punkt-get-detail'
+
+
+class GetSzczepienie(generics.ListAPIView):
+    queryset = Szczepienie.objects.all()
+    serializer_class = SzczepienieSerializer
+    permission_classes = (IsAuthenticated, IsOwnedByUser)
+    name = 'szczepienie-get'
+
+    def get_queryset(self):
+        user = self.request.user
+        return Szczepienie.objects.filter(pacjent=user)
+
+
 class ApiRoot(generics.GenericAPIView):
     name = 'api-root'
 

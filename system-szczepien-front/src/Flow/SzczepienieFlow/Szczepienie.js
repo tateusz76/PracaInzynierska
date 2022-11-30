@@ -14,7 +14,7 @@ const Szczepienie = () => {
     useEffect(() => {
       instance.get(requests.patientProfileGet , {
           headers: {
-            Authorization: 'Bearer ' + localStorage.getItem("access")
+            Authorization: 'Bearer ' + sessionStorage.getItem("access")
           }
         })
         .then(function (response) {
@@ -45,7 +45,7 @@ const Szczepienie = () => {
             method: "post",
             url: requests.rejestracjaSzczepienie,
             data: szczepienieData,
-            headers: { "Content-Type": "application/json", Authorization: 'Bearer ' + localStorage.getItem("access") },
+            headers: { "Content-Type": "application/json", Authorization: 'Bearer ' + sessionStorage.getItem("access") },
             
         })
         } catch(error) {

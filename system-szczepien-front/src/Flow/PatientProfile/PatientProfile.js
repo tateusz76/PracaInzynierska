@@ -15,7 +15,7 @@ const PatientProfile= () => {
   useEffect(() => {
     instance.get(requests.patientProfileGet , {
         headers: {
-          Authorization: 'Bearer ' + localStorage.getItem("access")
+          Authorization: 'Bearer ' + sessionStorage.getItem("access")
         }
       })
       .then(function (response) {

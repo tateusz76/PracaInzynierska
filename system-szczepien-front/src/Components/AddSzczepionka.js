@@ -20,7 +20,7 @@ function AddSzczepionka() {
         method: "post",
         url: "http://127.0.0.1:8000/szczepienia/szczepionka",
         data: vaccineData,
-        headers: { "Content-Type": "application/json", "Authorization":  'Bearer ' + localStorage.getItem("access") },
+        headers: { "Content-Type": "application/json", "Authorization":  'Bearer ' + sessionStorage.getItem("access") },
       });
     } catch(error) {
       console.log(error)

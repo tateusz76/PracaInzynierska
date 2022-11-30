@@ -14,7 +14,7 @@ const Punkt= () => {
     useEffect(() => {
       instance.get(requests.getPunkty , {
           headers: {
-            Authorization: 'Bearer ' + localStorage.getItem("access")
+            Authorization: 'Bearer ' + sessionStorage.getItem("access")
           }
         })
         .then(function (response) {
@@ -31,7 +31,7 @@ const Punkt= () => {
     <div className="Punkt">
         <Header></Header>
         {displayPunkty.length > 0 && <h1>Punkty</h1>}
-        {displayPunkty.length > 0 ? displayPunkty : <h1>Pusto</h1>}
+        {displayPunkty.length > 0 ? displayPunkty : <h1>Brak dostępnych punktów w Twojej okolicy</h1>}
         
     </div>
   );

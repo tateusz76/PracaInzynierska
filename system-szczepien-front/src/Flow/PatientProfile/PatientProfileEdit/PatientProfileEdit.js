@@ -21,7 +21,7 @@ const PatientEditProfile= () => {
             method: "put",
             url: requests.editPatientProfile,
             data: userData,
-            headers: { "Content-Type": "application/json", "Authorization":  'Bearer ' + localStorage.getItem("access") },
+            headers: { "Content-Type": "application/json", "Authorization":  'Bearer ' + sessionStorage.getItem("access") },
           })
         } catch(error) {
           console.log(error)

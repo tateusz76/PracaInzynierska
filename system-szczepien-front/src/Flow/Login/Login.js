@@ -18,7 +18,7 @@ function Login() {
 
   //CZY ZALOGOWANY
   const [isAuthenticated, setAuthenticated] = useState(() => {
-    const token = localStorage.getItem("access");
+    const token = sessionStorage.getItem("access");
     if(token !== null) console.log("zalogowany")
     else console.log("wylogowany")
   });
@@ -37,8 +37,8 @@ function Login() {
         headers: { "Content-Type": "application/json" },
       })
       .then((res) => {     
-        localStorage["access"]=res.data.access
-        localStorage["refresh"]=res.data.refresh
+        sessionStorage["access"]=res.data.access
+        sessionStorage["refresh"]=res.data.refresh
         navigate('/patientProfile');
   });
     } catch(error) {
