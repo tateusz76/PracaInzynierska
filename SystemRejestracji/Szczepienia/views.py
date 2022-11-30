@@ -36,8 +36,7 @@ class PatientProfileEdit(generics.UpdateAPIView):
 class SzczepionkaList(generics.ListCreateAPIView):
     queryset = Szczepionka.objects.all()
     serializer_class = SzczepionkaSerializer
-    permission_classes = [IsAuthenticated,
-                          IsAdminUser]
+    permission_classes = [IsAuthenticated]
     name = 'szczepionka-list'
 
 class SzczepionkaDetail(generics.RetrieveUpdateDestroyAPIView):
@@ -76,17 +75,6 @@ class SzczepienieDetail(generics.RetrieveUpdateDestroyAPIView):
         obj = get_object_or_404(self.get_queryset(), pk=self.kwargs["pk"])
         self.check_object_permissions(self.request, obj)
         return obj
-
-
-# class ZaszczepionyList(generics.ListCreateAPIView):
-#     queryset = Zaszczepiony.objects.all()
-#     serializer_class = ZaszczepionySerializer
-#     name = 'zaszczepiony-list'
-#
-# class ZaszczepionyDetail(generics.RetrieveUpdateDestroyAPIView):
-#     queryset = Zaszczepiony.objects.all()
-#     serializer_class = ZaszczepionySerializer
-#     name = 'zaszczepiony-details'
 
 
 class PunktList(generics.ListCreateAPIView):
