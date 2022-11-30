@@ -36,8 +36,7 @@ class PatientProfileEdit(generics.UpdateAPIView):
 class SzczepionkaList(generics.ListCreateAPIView):
     queryset = Szczepionka.objects.all()
     serializer_class = SzczepionkaSerializer
-    permission_classes = [IsAuthenticated,
-                          IsAdminUser]
+    permission_classes = [IsAuthenticated]
     name = 'szczepionka-list'
 
 class SzczepionkaDetail(generics.RetrieveUpdateDestroyAPIView):
@@ -78,21 +77,10 @@ class SzczepienieDetail(generics.RetrieveUpdateDestroyAPIView):
         return obj
 
 
-# class ZaszczepionyList(generics.ListCreateAPIView):
-#     queryset = Zaszczepiony.objects.all()
-#     serializer_class = ZaszczepionySerializer
-#     name = 'zaszczepiony-list'
-#
-# class ZaszczepionyDetail(generics.RetrieveUpdateDestroyAPIView):
-#     queryset = Zaszczepiony.objects.all()
-#     serializer_class = ZaszczepionySerializer
-#     name = 'zaszczepiony-details'
-
-
 class PunktList(generics.ListCreateAPIView):
     queryset = Punkt.objects.all()
     serializer_class = PunktSerializer
-    permission_classes = (AllowAny,)
+    permission_classes = (IsAuthenticated,)
     name = 'punkt-list'
 
 class PunktDetail(generics.RetrieveUpdateDestroyAPIView):
@@ -100,6 +88,31 @@ class PunktDetail(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = PunktSerializer
     permission_classes = (IsAuthenticated, IsAdminUser)
     name = 'punkt-details'
+
+
+class GetPunkty(generics.ListAPIView):
+    queryset = Punkt.objects.all()
+    serializer_class = PunktSerializer
+    permission_classes = (IsAuthenticated,)
+    name = 'punkt-get'
+
+
+class GetPunktyDetail(generics.RetrieveAPIView):
+    queryset = Punkt.objects.all()
+    serializer_class = PunktSerializer
+    permission_classes = (IsAuthenticated,)
+    name = 'punkt-get-detail'
+
+
+class GetSzczepienie(generics.ListAPIView):
+    queryset = Szczepienie.objects.all()
+    serializer_class = SzczepienieSerializer
+    permission_classes = (IsAuthenticated, IsOwnedByUser)
+    name = 'szczepienie-get'
+
+    def get_queryset(self):
+        user = self.request.user
+        return Szczepienie.objects.filter(pacjent=user)
 
 
 class ApiRoot(generics.GenericAPIView):
@@ -112,4 +125,5 @@ class ApiRoot(generics.GenericAPIView):
                          # 'zaszczepiony': reverse(ZaszczepionyList.name, request=request),
                          'punkt': reverse(PunktList.name, request=request),
                          'edit': reverse(PatientProfileEdit.name, request=request),
+                         'getPunkty': reverse(GetPunkty.name, request=request),
                          })
