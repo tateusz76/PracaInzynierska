@@ -32,7 +32,6 @@ const SzczepienieLista= () => {
         return e.dataSzczepienia >= date;
       }) : null
 
-      console.log(date);
 
     const displaySzczepienie = pastSzczepienia.map(e => {
         return <GetSzczepienie key={e.id} data={e.dataSzczepienia} szczepionka={e.szczepionka} punkt={e.punkt}/>

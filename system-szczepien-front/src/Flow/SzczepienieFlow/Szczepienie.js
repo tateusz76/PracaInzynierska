@@ -65,7 +65,6 @@ const Szczepienie = () => {
         punkt: '',
     });
 
-
     //handle submit do formularza
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -157,10 +156,9 @@ const Szczepienie = () => {
       <Header></Header>
       <div className="szczepienieRegister">
         <h1>Zarejestruj się na szczepienie</h1>
-
         <form className='szczepienieForm' onSubmit={handleSubmit}>
           <label> Data szczepienia:
-            <input type="date" name="dataSzczepienia"  onChange={handleChange}/>
+            <input type="date" name="dataSzczepienia" onChange={handleChange}/>
           </label>
 
           <label> Szczepionka:
