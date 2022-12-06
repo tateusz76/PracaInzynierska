@@ -10,6 +10,8 @@ import instance from '../../Axios';
 const Szczepienie = () => {
 
     const [patientData, setPatientData] = useState({});
+    const [szczepionkaSelected, setSzczepionkaSelected] = useState();
+    const [punktSelected, setPunktSelected] = useState();
 
     //pobranie danych pacjenta
     useEffect(() => {
@@ -55,8 +57,6 @@ const Szczepienie = () => {
          })
        }, []);
 
-      const [szczepionkaSelected, setSzczepionkaSelected] = useState();
-      const [punktSelected, setPunktSelected] = useState();
 
     //blank dane do formularza
     const [formValue, setformValue] = React.useState({
@@ -107,7 +107,7 @@ const Szczepienie = () => {
           const response = instance({
               method: "post",
               url: requests.rejestracjaSzczepienie,
-              data: szczepienieSecond,
+              data: szczepienieThird,
               headers: { "Content-Type": "application/json", Authorization: 'Bearer ' + sessionStorage.getItem("access") },
               
           })
@@ -119,7 +119,7 @@ const Szczepienie = () => {
             const response = instance({
                 method: "post",
                 url: requests.rejestracjaSzczepienie,
-                data: szczepienieThird,
+                data: szczepienieSecond,
                 headers: { "Content-Type": "application/json", Authorization: 'Bearer ' + sessionStorage.getItem("access") },
                 
             })
@@ -175,7 +175,7 @@ const Szczepienie = () => {
           <select name='punkt'  value={punktSelected} onChange={handleChange}>
               {punkty.map(e => (
                 <option key={e.nazwa} value={e.nazwa}>
-                  {e.nazwa}
+                  {e.nazwa + " " + e.miasto + " ul. " + e.ulica + " " + e.numer}
                 </option>
               ))}
             </select>
@@ -184,6 +184,9 @@ const Szczepienie = () => {
           </label>
             <input type="submit" className='submitbtn' value="Wyślij" />
         </form>
+      </div>
+      <div className='punktData'>
+
       </div>
     </div>
     )

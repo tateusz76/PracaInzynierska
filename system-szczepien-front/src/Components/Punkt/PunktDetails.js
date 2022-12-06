@@ -11,7 +11,6 @@ const PunktDetails= () => {
     const { idPunkt } = useParams();
 
     const [punktData, setPunktData] = useState({});
-
     const [center, setCenter] = useState();
 
     useEffect(() => {
