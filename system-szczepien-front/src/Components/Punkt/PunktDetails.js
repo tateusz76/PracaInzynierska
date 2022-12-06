@@ -1,16 +1,18 @@
 import React from "react";
-import { useContext, useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import requests from '../../Requests';
 import instance from '../../Axios';
 import {useParams} from 'react-router-dom';
 import Header from "../Header/Header";
-import { Map, Marker } from "pigeon-maps"
+import MapComponent from "./MapComponent";
 
 const PunktDetails= () => {       
     
     const { idPunkt } = useParams();
 
     const [punktData, setPunktData] = useState({});
+
+    const [center, setCenter] = useState();
 
     useEffect(() => {
         instance.get(`${requests.punktDetails}${idPunkt}` , {
@@ -20,28 +22,16 @@ const PunktDetails= () => {
           })
         .then(response => {
         setPunktData(response.data);
+        setCenter([response.data.centerX, response.data.centerY])
         });
     }, []);
-
-    const [hue, setHue] = useState(0)
-    const color = `hsl(${hue % 360}deg 39% 70%)`
-
-    const [center, setCenter] = useState([53.7764, 20.4786])
-    const [zoom, setZoom] = useState(11)
 
     return (
         <div className="Punkt">
             <Header></Header>
             <h1>{punktData.nazwa} {punktData.miasto} {punktData.ulica} {punktData.numer}</h1><br/>
 
-            <Map height={500} width={500} defaultCenter={center} defaultZoom={zoom}>
-                <Marker 
-                    width={50}
-                    anchor={[53.7764, 20.4786]} 
-                    color={color} 
-                    onClick={() => setHue(hue + 20)} 
-                />
-            </Map>
+            <MapComponent center = {center}/>
         </div>
     );
 }

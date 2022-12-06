@@ -51,4 +51,4 @@ class PunktSerializer(serializers.HyperlinkedModelSerializer):
 
     class Meta:
         model = Punkt
-        fields = ['id', 'nazwa', 'miasto', 'ulica', 'numer']
+        fields = ['id', 'nazwa', 'miasto', 'ulica', 'numer', 'centerX', 'centerY']

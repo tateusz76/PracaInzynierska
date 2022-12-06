@@ -53,6 +53,9 @@ class Punkt(models.Model):
     miasto = models.TextField(max_length=80)
     ulica = models.TextField(max_length=80)
     numer = models.TextField(max_length=80)
+    centerX = models.FloatField(null=True)
+    centerY = models.FloatField(null=True)
+
 
     def __str__(self):
         return str(self.nazwa) + ' ' + str(self.miasto) + ' ' + str(self.ulica) + ' ' + str(self.numer)

@@ -32,7 +32,7 @@ const Header = () => {
             <Link  to='/rejestracjaSzczepienie' className='navLink'><i className="fa fa-fw fa-user"></i>Zarejestruj szczepienie</Link>
             {isLoggedIn == false ? 
                 <Link  to='/login' className='navLink'><i className="fa-solid fa-right-to-bracket"></i> Zaloguj się</Link> :
-                <Link onClick={logout}  to='/logout' className='navLink'><i className="fa-solid fa-right-from-bracket"></i>Wyloguj się</Link>}
+                <Link onClick={logout}  to='/login' className='navLink'><i className="fa-solid fa-right-from-bracket"></i>Wyloguj się</Link>}
         </div>
     </div>
     )
