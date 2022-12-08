@@ -25,6 +25,8 @@ const PunktDetails= () => {
         });
     }, []);
 
+    console.log(center);
+
     return (
         <div className="Punkt">
             <Header></Header>

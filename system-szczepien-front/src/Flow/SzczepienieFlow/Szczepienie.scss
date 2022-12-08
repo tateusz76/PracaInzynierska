@@ -13,8 +13,16 @@
 .szczepienieRegister
 {
     display: flex;
-    flex-direction: column;
-    align-items: center;
+    float: left;
+    width: 100vh;
+    justify-content: flex-end;
+    padding-right: 10vh;
+}
+
+.punktData
+{
+    float: left;
+    padding-top: 26px;
 }
 
 .szczepienieForm
@@ -29,3 +37,4 @@ label
     flex-direction: column;
     margin-top: 10%;
 }
+

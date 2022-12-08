@@ -6,12 +6,15 @@ import React from "react";
 import requests from '../../Requests';
 import './Szczepienie.css';
 import instance from '../../Axios';
+import MapComponent from '../../Components/Punkt/MapComponent';
 
 const Szczepienie = () => {
 
     const [patientData, setPatientData] = useState({});
     const [szczepionkaSelected, setSzczepionkaSelected] = useState();
     const [punktSelected, setPunktSelected] = useState();
+    let [center, setCenter] = useState();
+
 
     //pobranie danych pacjenta
     useEffect(() => {
@@ -53,10 +56,12 @@ const Szczepienie = () => {
          .then(function (response) {
            setPunkty(response.data);
            setPunktSelected(response.data[0].nazwa);
-           setformValue(prevValue => ({...prevValue, punkt: response.data[0].nazwa}))
+           setformValue(prevValue => ({...prevValue, punkt: response.data[0].nazwa}));
+           setCenter([response.data[0].centerX, response.data[0].centerY]);
          })
        }, []);
 
+       console.log(center);
 
     //blank dane do formularza
     const [formValue, setformValue] = React.useState({
@@ -130,11 +135,24 @@ const Szczepienie = () => {
  
     const handleChange = (event) => {
       setSzczepionkaSelected(event.target.value);
+      setformValue({
+      ...formValue,
+      [event.target.name]: event.target.value
+      });
+  }
+
+    const handlePunktchange = (event) => {
       setPunktSelected(event.target.value);
       setformValue({
       ...formValue,
       [event.target.name]: event.target.value
       });
+
+      let result = punkty.filter(e => {
+        return e.nazwa === event.target.value;
+      })
+
+      setCenter([result[0].centerX, result[0].centerY])
   }
 
   function formatDate(date) {
@@ -154,8 +172,8 @@ const Szczepienie = () => {
   return (
     <div className="szczepienie">
       <Header></Header>
+      <h1 style={{display: 'flex',  justifyContent:'center', alignItems:'center'}}>Zarejestruj się na szczepienie</h1>
       <div className="szczepienieRegister">
-        <h1>Zarejestruj się na szczepienie</h1>
         <form className='szczepienieForm' onSubmit={handleSubmit}>
           <label> Data szczepienia:
             <input type="date" name="dataSzczepienia" onChange={handleChange}/>
@@ -172,21 +190,20 @@ const Szczepienie = () => {
           </label>
 
           <label> Punkt Szczepień:
-          <select name='punkt'  value={punktSelected} onChange={handleChange}>
+          <select name='punkt'  value={punktSelected} onChange={handlePunktchange}>
               {punkty.map(e => (
                 <option key={e.nazwa} value={e.nazwa}>
                   {e.nazwa + " " + e.miasto + " ul. " + e.ulica + " " + e.numer}
                 </option>
               ))}
             </select>
-            
-            {/* <input type="text" name="punkt"  onChange={handleChange}/> */}
           </label>
             <input type="submit" className='submitbtn' value="Wyślij" />
         </form>
       </div>
       <div className='punktData'>
-
+        Twój wybrany punkt szczepień: {punktSelected}
+        <MapComponent center = {center}/>
       </div>
     </div>
     )
