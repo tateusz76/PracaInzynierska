@@ -14,7 +14,9 @@ const Szczepienie = () => {
     const [szczepionkaSelected, setSzczepionkaSelected] = useState();
     const [punktSelected, setPunktSelected] = useState();
     let [center, setCenter] = useState();
+    const [errorMessage,setError]=useState();
 
+    const twoDose = ["AstraZeneca", "Novavax"];
 
     //pobranie danych pacjenta
     useEffect(() => {
@@ -61,8 +63,6 @@ const Szczepienie = () => {
          })
        }, []);
 
-       console.log(center);
-
     //blank dane do formularza
     const [formValue, setformValue] = React.useState({
         dataSzczepienia: '',
@@ -95,6 +95,12 @@ const Szczepienie = () => {
         szczepienieThird.append("szczepionka", formValue.szczepionka)
         szczepienieThird.append("punkt", formValue.punkt)
 
+        if(szczepienieData.dataSzczepienia == undefined)
+        {
+          setError('Wystąpił błąd. Upewnij się, że wybrałeś datę szczepienia.');
+          console.log("error");
+        }
+
         //request do wysłania formularza
         try {
         const response = instance({
@@ -108,18 +114,20 @@ const Szczepienie = () => {
         console.log();
         }
 
-        try {
-          const response = instance({
-              method: "post",
-              url: requests.rejestracjaSzczepienie,
-              data: szczepienieThird,
-              headers: { "Content-Type": "application/json", Authorization: 'Bearer ' + sessionStorage.getItem("access") },
-              
-          })
-          } catch(error) {
-          console.log();
-          }
-
+        if(!twoDose.includes(formValue.szczepionka))
+        {
+          try {
+            const response = instance({
+                method: "post",
+                url: requests.rejestracjaSzczepienie,
+                data: szczepienieThird,
+                headers: { "Content-Type": "application/json", Authorization: 'Bearer ' + sessionStorage.getItem("access") },
+                
+            })
+            } catch(error) {
+            console.log();
+            }
+        }
           try {
             const response = instance({
                 method: "post",
@@ -175,12 +183,12 @@ const Szczepienie = () => {
       <h1 style={{display: 'flex',  justifyContent:'center', alignItems:'center'}}>Zarejestruj się na szczepienie</h1>
       <div className="szczepienieRegister">
         <form className='szczepienieForm' onSubmit={handleSubmit}>
-          <label> Data szczepienia:
-            <input type="date" name="dataSzczepienia" onChange={handleChange}/>
+          <label><h3> Data szczepienia:</h3>
+            <input className='formInput' type="date" name="dataSzczepienia" onChange={handleChange}/>
           </label>
 
-          <label> Szczepionka:
-          <select name='szczepionka' value={szczepionkaSelected} onChange={handleChange}>
+          <label> <h3>Szczepionka:</h3>
+          <select className='formInput' name='szczepionka' value={szczepionkaSelected} onChange={handleChange}>
               {szczepionki.map(e => (
                 <option key={e.nazwaSzczepionki} value={e.nazwaSzczepionki} >
                   {e.nazwaSzczepionki}
@@ -189,8 +197,8 @@ const Szczepienie = () => {
             </select>
           </label>
 
-          <label> Punkt Szczepień:
-          <select name='punkt'  value={punktSelected} onChange={handlePunktchange}>
+          <label> <h3>Punkt Szczepień:</h3>
+          <select className='formInput' name='punkt'  value={punktSelected} onChange={handlePunktchange}>
               {punkty.map(e => (
                 <option key={e.nazwa} value={e.nazwa}>
                   {e.nazwa + " " + e.miasto + " ul. " + e.ulica + " " + e.numer}
@@ -199,10 +207,16 @@ const Szczepienie = () => {
             </select>
           </label>
             <input type="submit" className='submitbtn' value="Wyślij" />
+            {errorMessage?<label className='error'>{errorMessage}</label>:null} 
+            <h3>Szczepionka: {szczepionkaSelected}</h3>
+            {twoDose.includes(szczepionkaSelected)
+          ? <h3>Szczepienie będzie składało się<br/> z <u>dwóch</u> dawek szczepionki</h3>
+          : <h3>Szczepienie będzie składało się<br/> z <u>trzech</u> dawek szczepionki</h3>
+        }
         </form>
       </div>
       <div className='punktData'>
-        Twój wybrany punkt szczepień: {punktSelected}
+      <h3>Twój wybrany punkt szczepień: {punktSelected}</h3>
         <MapComponent center = {center}/>
       </div>
     </div>

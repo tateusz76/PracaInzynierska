@@ -9,7 +9,7 @@ const MapComponent= ({center}) => {
 
     return (
         <div className="Mapa">
-            <Map height={500} width={500} center={center} defaultZoom={19}>
+            <Map height={500} width={500} center={center} defaultZoom={18}>
                 <Marker 
                     width={50}
                     anchor={center} 

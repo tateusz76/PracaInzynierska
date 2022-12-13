@@ -30,5 +30,19 @@
 label {
   display: flex;
   flex-direction: column;
+}
+
+.error {
+  color: red;
   margin-top: 10%;
+}
+
+.formInput {
+  width: 50vh;
+  height: 6vh;
+  font-size: 20px;
+}
+
+form {
+  margin-top: 3vh;
 }
