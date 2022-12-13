@@ -14,6 +14,7 @@ function Login() {
     password: '',
   });
 
+  const [errorMessage,setError]=useState();
   const navigate = useNavigate();
 
   //CZY ZALOGOWANY
@@ -43,6 +44,7 @@ function Login() {
   });
     } catch(error) {
       console.log(error)
+      setError('Wystąpił błąd podczas logowania, upewnij się, że podałeś poprawne dane logowania.')
     }
 
   }
@@ -60,16 +62,17 @@ function Login() {
     <h1>Zaloguj się</h1>
 
     <form className='loginForm' onSubmit={handleSubmit}>
-      <label> Adres email:
+      <label className='labelForm'> Adres email:
         <input type="text" name="email"  onChange={handleChange}/>
       </label>
-      <label> Hasło:
+      <label className='labelForm'> Hasło:
         <input type="password" name="password"  onChange={handleChange}/>
       </label>
         <input type="submit" className='submitbtn' value="Wyślij" />
     </form>
 
     <p>Nie jesteś zarejestrowanym pacjentem?</p><Link  to='/register'><i className="fa fa-fw fa-user"></i>Zarejestruj się</Link>
+    {errorMessage?<label className='loginError'>{errorMessage}</label>:null} 
   </div>
     )
 }

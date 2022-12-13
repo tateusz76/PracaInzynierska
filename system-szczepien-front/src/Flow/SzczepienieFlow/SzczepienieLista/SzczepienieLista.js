@@ -24,24 +24,25 @@ const SzczepienieLista= () => {
         })
       }, []);
 
-      const pastSzczepienia = szczepienieData ? szczepienieData.filter(e => {
-        return e.dataSzczepienia < date;
-      }) : null
+      const pastSzczepienia = szczepienieData.filter(e => {
+        return new Date(e.dataSzczepienia) < new Date(date);
+      }) 
 
-      const nextSzczepienia = szczepienieData ? szczepienieData.filter(e => {
-        return e.dataSzczepienia >= date;
-      }) : null
+      const nextSzczepienia = szczepienieData.filter(e => {
+        return new Date(e.dataSzczepienia) >= new Date(date);
+      })
 
-      console.log(date);
 
-    const displaySzczepienie = pastSzczepienia.map(e => {
-        return <GetSzczepienie key={e.id} data={e.dataSzczepienia} szczepionka={e.szczepionka} punkt={e.punkt}/>
-    });
-            
-    const displayNext = nextSzczepienia.map(e => {
-        return <GetSzczepienie key={e.id} data={e.dataSzczepienia} szczepionka={e.szczepionka} punkt={e.punkt}/>
-    });
+      const displaySzczepienie = pastSzczepienia.map(e => {
+          return <GetSzczepienie key={e.id} data={e.dataSzczepienia} szczepionka={e.szczepionka} punkt={e.punkt}/>
+      });
+              
+      const displayNext = nextSzczepienia.map(e => {
+          return <GetSzczepienie key={e.id} data={e.dataSzczepienia} szczepionka={e.szczepionka} punkt={e.punkt}/>
+      });
         
+      console.log(new Date(date).getDate());
+      
 
   return (
     <div className="Punkt">

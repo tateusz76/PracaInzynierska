@@ -22,9 +22,16 @@
     flex-direction: column;
 }
 
-label
+.labelForm
 {
     display: flex;
     flex-direction: column;
     margin-top: 10%;
+}
+
+.loginError
+{
+    color: red;
+    display: flex;
+    margin-top: 3vh;
 }

@@ -1,5 +1,6 @@
 import React from "react";
 import { useNavigate } from 'react-router-dom';
+import './Punkty.css';
 
 
 const GetPunkty= ({id, nazwa, miasto, ulica, numer}) => {      

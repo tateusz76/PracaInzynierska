@@ -1,10 +1,8 @@
 import './App.css';
-import axios from "axios";
 import React from "react";
 import {useState } from 'react';
 import AddSzczepionka from './Components/AddSzczepionka';
 import {BrowserRouter as Router, Route, Routes, Link, useNavigate, useParams} from 'react-router-dom';
-import MainPage from './Components/MainPage';
 import Login from './Flow/Login/Login';
 import Register from './Flow/Register/Register';
 import Logout from './Flow/Login/Logout';
@@ -50,6 +48,7 @@ function App() {
             <Route exact path="rejestracjaSzczepienie" element={<Szczepienie/>} />
             <Route exact path="szczepienieList" element={<SzczepienieLista/>} />
             <Route exact path="punktDetails/:idPunkt" element={<PunktDetails/>} />
+
       </Routes>
     </div>
   );
