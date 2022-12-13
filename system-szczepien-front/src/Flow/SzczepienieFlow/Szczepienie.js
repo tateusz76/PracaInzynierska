@@ -10,11 +10,16 @@ import MapComponent from '../../Components/Punkt/MapComponent';
 
 const Szczepienie = () => {
 
+    const navigate = useNavigate();
+
     const [patientData, setPatientData] = useState({});
     const [szczepionkaSelected, setSzczepionkaSelected] = useState();
     const [punktSelected, setPunktSelected] = useState();
     let [center, setCenter] = useState();
     const [errorMessage,setError]=useState();
+
+    const today = new Date();
+    const date = `${today.getFullYear()}-${today.getMonth()+1}-${today.getDate()}`;
 
     const twoDose = ["AstraZeneca", "Novavax"];
 
@@ -74,71 +79,82 @@ const Szczepienie = () => {
     const handleSubmit = (e) => {
         e.preventDefault();
         const szczepienieData = new FormData();
-        szczepienieData.append("pacjent", patientData.username)
-        szczepienieData.append("dataSzczepienia", formValue.dataSzczepienia)
-        szczepienieData.append("szczepionka", formValue.szczepionka)
-        szczepienieData.append("punkt", formValue.punkt)
-
-        const secondDate = new Date(formValue.dataSzczepienia);
-        secondDate.setDate(secondDate.getDate() + 14);
-        const szczepienieSecond = new FormData();
-        szczepienieSecond.append("pacjent", patientData.username)
-        szczepienieSecond.append("dataSzczepienia", formatDate(secondDate))
-        szczepienieSecond.append("szczepionka", formValue.szczepionka)
-        szczepienieSecond.append("punkt", formValue.punkt)
-
-        const thirdDate = new Date(formValue.dataSzczepienia);
-        thirdDate.setDate(thirdDate.getDate() + 28);
-        const szczepienieThird = new FormData();
-        szczepienieThird.append("pacjent", patientData.username)
-        szczepienieThird.append("dataSzczepienia", formatDate(thirdDate))
-        szczepienieThird.append("szczepionka", formValue.szczepionka)
-        szczepienieThird.append("punkt", formValue.punkt)
-
-        if(szczepienieData.dataSzczepienia == undefined)
+        if(formValue.dataSzczepienia < date)
         {
-          setError('Wystąpił błąd. Upewnij się, że wybrałeś datę szczepienia.');
-          console.log("error");
+          setError('Wystąpił błąd. Upewnij się, że wybrałeś poprawną datę.');
         }
-
-        //request do wysłania formularza
-        try {
-        const response = instance({
-            method: "post",
-            url: requests.rejestracjaSzczepienie,
-            data: szczepienieData,
-            headers: { "Content-Type": "application/json", Authorization: 'Bearer ' + sessionStorage.getItem("access") },
-            
-        })
-        } catch(error) {
-        console.log();
-        }
-
-        if(!twoDose.includes(formValue.szczepionka))
+        else
         {
+          szczepienieData.append("pacjent", patientData.username)
+          szczepienieData.append("dataSzczepienia", formValue.dataSzczepienia)
+          szczepienieData.append("szczepionka", formValue.szczepionka)
+          szczepienieData.append("punkt", formValue.punkt)
+
+          const secondDate = new Date(formValue.dataSzczepienia);
+          secondDate.setDate(secondDate.getDate() + 14);
+          const szczepienieSecond = new FormData();
+          szczepienieSecond.append("pacjent", patientData.username)
+          szczepienieSecond.append("dataSzczepienia", formatDate(secondDate))
+          szczepienieSecond.append("szczepionka", formValue.szczepionka)
+          szczepienieSecond.append("punkt", formValue.punkt)
+
+          const thirdDate = new Date(formValue.dataSzczepienia);
+          thirdDate.setDate(thirdDate.getDate() + 28);
+          const szczepienieThird = new FormData();
+          szczepienieThird.append("pacjent", patientData.username)
+          szczepienieThird.append("dataSzczepienia", formatDate(thirdDate))
+          szczepienieThird.append("szczepionka", formValue.szczepionka)
+          szczepienieThird.append("punkt", formValue.punkt)
+
+          if(formValue.dataSzczepienia == '')
+          {
+            setError('Wystąpił błąd. Upewnij się, że wybrałeś poprawną datę.');
+          }
+          else 
+          {
+            setError('');
+            navigate('/szczepienieList');
+          }
+
+          //request do wysłania formularza
           try {
-            const response = instance({
-                method: "post",
-                url: requests.rejestracjaSzczepienie,
-                data: szczepienieThird,
-                headers: { "Content-Type": "application/json", Authorization: 'Bearer ' + sessionStorage.getItem("access") },
-                
-            })
-            } catch(error) {
-            console.log();
-            }
-        }
-          try {
-            const response = instance({
-                method: "post",
-                url: requests.rejestracjaSzczepienie,
-                data: szczepienieSecond,
-                headers: { "Content-Type": "application/json", Authorization: 'Bearer ' + sessionStorage.getItem("access") },
-                
-            })
-            } catch(error) {
-            console.log();
-            }
+          const response = instance({
+              method: "post",
+              url: requests.rejestracjaSzczepienie,
+              data: szczepienieData,
+              headers: { "Content-Type": "application/json", Authorization: 'Bearer ' + sessionStorage.getItem("access") },
+              
+          })
+          } catch(error) {
+          console.log();
+          }
+
+          if(!twoDose.includes(formValue.szczepionka))
+          {
+            try {
+              const response = instance({
+                  method: "post",
+                  url: requests.rejestracjaSzczepienie,
+                  data: szczepienieThird,
+                  headers: { "Content-Type": "application/json", Authorization: 'Bearer ' + sessionStorage.getItem("access") },
+                  
+              })
+              } catch(error) {
+              console.log();
+              }
+          }
+            try {
+              const response = instance({
+                  method: "post",
+                  url: requests.rejestracjaSzczepienie,
+                  data: szczepienieSecond,
+                  headers: { "Content-Type": "application/json", Authorization: 'Bearer ' + sessionStorage.getItem("access") },
+                  
+              })
+              } catch(error) {
+              console.log();
+              }
+      }
     }
  
     const handleChange = (event) => {

@@ -115,6 +115,17 @@ class GetSzczepienie(generics.ListAPIView):
         return Szczepienie.objects.filter(pacjent=user)
 
 
+class EditSzczepienieDate(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Szczepienie.objects.all()
+    serializer_class = SzczepienieEditDateSerializer
+    permission_classes = (IsAuthenticated, IsOwnedByUser)
+    name = 'szczepienie-edit'
+
+    def get_queryset(self):
+        user = self.request.user
+        return Szczepienie.objects.filter(pacjent=user)
+
+
 class ApiRoot(generics.GenericAPIView):
     name = 'api-root'
 

@@ -40,6 +40,12 @@ class SzczepienieSerializer(serializers.HyperlinkedModelSerializer):
         fields = ['id', 'pacjent', 'dataSzczepienia', 'szczepionka', 'punkt', 'czyOstatniaDawka']
 
 
+class SzczepienieEditDateSerializer(serializers.HyperlinkedModelSerializer):
+    class Meta:
+        model = Szczepienie
+        fields = ['id', 'dataSzczepienia']
+
+
 # class ZaszczepionySerializer(serializers.HyperlinkedModelSerializer):
 #
 #     class Meta:

@@ -17,6 +17,7 @@ urlpatterns = [
     path('getPunkty', views.GetPunkty.as_view(), name='punkt-get'),
     path('getPunkty/<int:pk>', views.GetPunktyDetail.as_view(), name='punkt-get-details'),
     path('getSzczepienie', views.GetSzczepienie.as_view(), name='szczepienie-get'),
+    path('editDate/<int:pk>', views.EditSzczepienieDate.as_view(), name='szczepienie-edit-date'),
     #path('', views.ApiRoot.as_view(), name=views.ApiRoot.name),
     path('', include('djoser.urls')),
     path('', include('djoser.urls.authtoken')),

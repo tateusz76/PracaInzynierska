@@ -40,9 +40,7 @@ const SzczepienieLista= () => {
       const displayNext = nextSzczepienia.map(e => {
           return <GetSzczepienie key={e.id} data={e.dataSzczepienia} szczepionka={e.szczepionka} punkt={e.punkt}/>
       });
-        
-      console.log(new Date(date).getDate());
-      
+
 
   return (
     <div className="Punkt">
