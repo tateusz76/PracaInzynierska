@@ -24,6 +24,16 @@ from django.shortcuts import get_list_or_404, get_object_or_404
 #     name = 'pacjent-details'
 
 
+class UserList(generics.ListCreateAPIView):
+    serializer_class = PacjentSerializer
+    permission_classes = [permissions.IsAuthenticated]
+    name = 'pacjent-list'
+
+    def get_queryset(self):
+        user = self.request.user.username
+        return Pacjent.objects.all().filter(username=user)
+
+
 class PatientProfileEdit(generics.UpdateAPIView):
     serializer_class = PatientEditProfileSerializer
     permission_classes = [permissions.IsAuthenticated,]
@@ -36,8 +46,9 @@ class PatientProfileEdit(generics.UpdateAPIView):
 class SzczepionkaList(generics.ListCreateAPIView):
     queryset = Szczepionka.objects.all()
     serializer_class = SzczepionkaSerializer
-    permission_classes = [IsAuthenticated]
+    permission_classes = [IsAuthenticated, IsAdminUser]
     name = 'szczepionka-list'
+
 
 class SzczepionkaDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Szczepionka.objects.all()
@@ -80,7 +91,7 @@ class SzczepienieDetail(generics.RetrieveUpdateDestroyAPIView):
 class PunktList(generics.ListCreateAPIView):
     queryset = Punkt.objects.all()
     serializer_class = PunktSerializer
-    permission_classes = (IsAuthenticated,)
+    permission_classes = (IsAuthenticated, IsAdminUser)
     name = 'punkt-list'
 
 class PunktDetail(generics.RetrieveUpdateDestroyAPIView):

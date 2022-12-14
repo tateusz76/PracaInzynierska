@@ -1,7 +1,7 @@
 import './App.css';
 import React from "react";
 import {useState } from 'react';
-import AddSzczepionka from './Components/AddSzczepionka';
+import AddSzczepionka from './Flow/AdminFlow/AddSzczepionka';
 import {BrowserRouter as Router, Route, Routes, Link, useNavigate, useParams} from 'react-router-dom';
 import Login from './Flow/Login/Login';
 import Register from './Flow/Register/Register';
@@ -13,6 +13,7 @@ import Szczepienie from './Flow/SzczepienieFlow/Szczepienie';
 import SzczepienieLista from './Flow/SzczepienieFlow/SzczepienieLista/SzczepienieLista';
 import PunktDetails from './Components/Punkt/PunktDetails';
 import SzczepienieEdit from './Flow/SzczepienieFlow/SzczepienieEdit/SzczepienieEdit';
+import AddPunkt from './Flow/AdminFlow/AddPunkt';
 
 
 
@@ -39,7 +40,6 @@ function App() {
                 <Route path="/" element={<PatientProfile />} />}
             {/* <Route path="*" element={<MainPage />} />
             <Route exact path="/" element={<MainPage />} /> */}
-            <Route exact path="dodajSzczepionke" element={<AddSzczepionka/>} />
             <Route exact path="login" element={<Login/>} />
             <Route exact path="register" element={<Register/>} />
             <Route exact path="logout" element={<Logout/>} />
@@ -50,6 +50,10 @@ function App() {
             <Route exact path="szczepienieList" element={<SzczepienieLista/>} />
             <Route exact path="punktDetails/:idPunkt" element={<PunktDetails/>} />
             <Route exact path="editDate" element={<SzczepienieEdit/>} />
+
+            {/* ADMIN */}
+            <Route exact path="szczepionkaAdd" element={<AddSzczepionka/>} />
+            <Route exact path="punktAdd" element={<AddPunkt/>} />
 
       </Routes>
     </div>

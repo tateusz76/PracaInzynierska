@@ -6,6 +6,7 @@ import requests from "../../Requests";
 import { Link, Navigate } from 'react-router-dom';
 import './PatientProfile.css';
 import instance from '../../Axios';
+import AdminHeader from "../../Components/Header/AdminHeader";
 
 
 const PatientProfile= () => {
@@ -19,16 +20,23 @@ const PatientProfile= () => {
         }
       })
       .then(function (response) {
-        //console.log(response.data);
-        setPatientData(response.data[0]);
+        setPatientData(response.data[0]);  
       })
     }, []);
-      
+
     //console.log(patientData);
+
+    {patientData.is_staff == true
+      ? sessionStorage.setItem("isAdmin", "admin")
+      : sessionStorage.setItem("isAdmin", "user")
+    }
 
   return (
     <div className="PatientProfile">
-      <Header></Header>
+      {sessionStorage.getItem("isAdmin") == "admin"
+        ? <AdminHeader/>
+        : <Header/>
+      }
       <div className="profileContainer">
         <h1 className='PatientProfile--header'>Witaj na swoim profilu  {patientData.username}</h1>
 

@@ -23,4 +23,6 @@ urlpatterns = [
     path('', include('djoser.urls.authtoken')),
 
     path('edit', views.PatientProfileEdit.as_view(), name='edit-profile'),
+
+    path('userList', views.UserList.as_view(), name='user-list'),
 ]

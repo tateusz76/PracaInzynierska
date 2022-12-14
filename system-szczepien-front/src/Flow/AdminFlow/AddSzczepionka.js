@@ -1,6 +1,9 @@
-import Header from "./Header/Header";
+import Header from "../../Components/Header/Header";
 import axios from "axios";
 import React from "react";
+import requests from "../../Requests";
+import instance from "../../Axios";
+import AdminHeader from "../../Components/Header/AdminHeader";
 
 
 
@@ -16,9 +19,9 @@ function AddSzczepionka() {
     vaccineData.append("nazwaSzczepionki", formValue.nazwaSzczepionki)
 
     try {
-      const response = await axios({
+      const response = await instance({
         method: "post",
-        url: "http://127.0.0.1:8000/szczepienia/szczepionka",
+        url: requests.szczepionka,
         data: vaccineData,
         headers: { "Content-Type": "application/json", "Authorization":  'Bearer ' + sessionStorage.getItem("access") },
       });
@@ -39,7 +42,7 @@ function AddSzczepionka() {
 
   return (
     <div className="AddSzczepionka">
-      <Header></Header>
+      <AdminHeader/>
       <h1>Dodaj szczepionkę</h1>
 
       <form onSubmit={handleSubmit}>

@@ -6,7 +6,7 @@ class PacjentSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Pacjent
-        fields = '__all__'
+        fields = ['username', 'first_name', 'last_name', 'email', 'is_staff']
 
 
 class PatientEditProfileSerializer(serializers.ModelSerializer):
