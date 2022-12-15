@@ -39,7 +39,7 @@ const Szczepienie = () => {
       const [szczepionki, setSzczepionki] = useState([]);
       
       useEffect(() => {
-        instance.get(requests.szczepionki , {
+        instance.get(requests.szczepionkaGet , {
            headers: {
              Authorization: 'Bearer ' + sessionStorage.getItem("access")
             }

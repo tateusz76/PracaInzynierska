@@ -8,6 +8,7 @@ urlpatterns = [
     # path('pacjent/<int:pk>', views.PacjentDetail.as_view(), name='pacjent-details'),
     path('szczepionka', views.SzczepionkaList.as_view(), name='szczepionka-list'),
     path('szczepionka/<int:pk>', views.SzczepionkaDetail.as_view(), name='szczepionka-details'),
+    path('szczepionkaGet', views.SzczepionkaGet.as_view(), name='szczepionka-get'),
     path('szczepienie', views.SzczepienieList.as_view(), name='szczepienie-list'),
     path('szczepienie/<int:pk>', views.SzczepienieDetail.as_view(), name='szczepienie-details'),
     # path('zaszczepiony', views.ZaszczepionyList.as_view(), name='zaszczepiony-list'),

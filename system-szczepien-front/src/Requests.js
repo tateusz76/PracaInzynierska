@@ -6,8 +6,8 @@ const requests = {
     punktDetails: 'http://127.0.0.1:8000/szczepienia/getPunkty/',
     rejestracjaSzczepienie: "http://127.0.0.1:8000/szczepienia/szczepienie",
     getSzczepienie: 'http://127.0.0.1:8000/szczepienia/getSzczepienie',
-    szczepionki: 'http://127.0.0.1:8000/szczepienia/szczepionka',
-    editSzczepienie: 'http://127.0.0.1:8000/szczepienia/editDate/',
+    szczepionkaGet: 'http://127.0.0.1:8000/szczepienia/szczepionkaGet',
+    szczepienieDetail: 'http://127.0.0.1:8000/szczepienia/szczepienie/',
 
     //ADMIN 
     szczepionka: 'http://127.0.0.1:8000/szczepienia/szczepionka',

@@ -58,6 +58,13 @@ class SzczepionkaDetail(generics.RetrieveUpdateDestroyAPIView):
     name = 'szczepionka-details'
 
 
+class SzczepionkaGet(generics.ListAPIView):
+    queryset = Szczepionka.objects.all()
+    serializer_class = SzczepionkaSerializer
+    permission_classes = [IsAuthenticated]
+    name = 'szczepionka-get'
+
+
 class SzczepienieList(generics.ListCreateAPIView):
     serializer_class = SzczepienieSerializer
     permission_classes = (permissions.IsAuthenticated, IsOwnedByUser)
