@@ -7,6 +7,7 @@ import { Link, Navigate } from 'react-router-dom';
 import './PatientProfile.css';
 import instance from '../../Axios';
 import AdminHeader from "../../Components/Header/AdminHeader";
+import CzyZaszczepiony from "../../Components/CzyZaszczepiony/CzyZaszczepiony";
 
 
 const PatientProfile= () => {
@@ -44,6 +45,7 @@ const PatientProfile= () => {
 
         <Link  to='/patientEditProfile' className='navLink'><h2>Zmień nazwę użytkownika</h2></Link>
       </div>
+      <CzyZaszczepiony/>
     </div>
   );
 }

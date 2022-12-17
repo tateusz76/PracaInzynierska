@@ -12,11 +12,13 @@ function AddSzczepionka() {
 
   const [formValue, setformValue] = React.useState({
     nazwaSzczepionki: '',
+    dawkaSzczepionki: '',
   });
 
   const handleSubmit = async() => {
     const vaccineData = new FormData();
     vaccineData.append("nazwaSzczepionki", formValue.nazwaSzczepionki)
+    vaccineData.append("dawkaSzczepionki", formValue.dawkaSzczepionki)
 
     try {
       const response = await instance({
@@ -48,6 +50,9 @@ function AddSzczepionka() {
       <form onSubmit={handleSubmit}>
         <label> Nazwa szczepionki:
           <input type="text" name="nazwaSzczepionki"  onChange={handleChange}/>
+        </label>
+        <label> Ilość dawek:
+          <input type="number" name="dawkaSzczepionki"  onChange={handleChange}/>
         </label>
         <input type="submit" value="Wyślij" />
       </form>

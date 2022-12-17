@@ -26,7 +26,7 @@ class SzczepionkaSerializer(serializers.HyperlinkedModelSerializer):
 
     class Meta:
         model = Szczepionka
-        fields = ['id', 'nazwaSzczepionki']
+        fields = ['id', 'nazwaSzczepionki', 'dawka']
 
 
 class SzczepienieSerializer(serializers.HyperlinkedModelSerializer):

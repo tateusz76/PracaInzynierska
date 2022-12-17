@@ -17,11 +17,10 @@ const Szczepienie = () => {
     const [punktSelected, setPunktSelected] = useState();
     let [center, setCenter] = useState();
     const [errorMessage,setError]=useState();
+    let [dosage, setDosage] = useState();
 
     const today = new Date();
     const date = `${today.getFullYear()}-${today.getMonth()+1}-${today.getDate()}`;
-
-    const twoDose = ["AstraZeneca", "Novavax"];
 
     //pobranie danych pacjenta
     useEffect(() => {
@@ -48,6 +47,7 @@ const Szczepienie = () => {
            setSzczepionki(response.data);
            setSzczepionkaSelected(response.data[0].nazwaSzczepionki);
            setformValue(prevValue => ({...prevValue, szczepionka: response.data[0].nazwaSzczepionki}))
+           setDosage(3);
           })
        }, []);
 
@@ -89,6 +89,7 @@ const Szczepienie = () => {
           szczepienieData.append("dataSzczepienia", formValue.dataSzczepienia)
           szczepienieData.append("szczepionka", formValue.szczepionka)
           szczepienieData.append("punkt", formValue.punkt)
+          szczepienieData.append("czyOstatniaDawka", false)
 
           const secondDate = new Date(formValue.dataSzczepienia);
           secondDate.setDate(secondDate.getDate() + 14);
@@ -97,6 +98,14 @@ const Szczepienie = () => {
           szczepienieSecond.append("dataSzczepienia", formatDate(secondDate))
           szczepienieSecond.append("szczepionka", formValue.szczepionka)
           szczepienieSecond.append("punkt", formValue.punkt)
+          if(dosage == 2)
+          {
+            szczepienieSecond.append("czyOstatniaDawka", true)
+          }
+          else
+          {
+            szczepienieSecond.append("czyOstatniaDawka", false)
+          }
 
           const thirdDate = new Date(formValue.dataSzczepienia);
           thirdDate.setDate(thirdDate.getDate() + 28);
@@ -105,6 +114,7 @@ const Szczepienie = () => {
           szczepienieThird.append("dataSzczepienia", formatDate(thirdDate))
           szczepienieThird.append("szczepionka", formValue.szczepionka)
           szczepienieThird.append("punkt", formValue.punkt)
+          szczepienieThird.append("czyOstatniaDawka", true)
 
           if(formValue.dataSzczepienia == '')
           {
@@ -129,7 +139,19 @@ const Szczepienie = () => {
           console.log();
           }
 
-          if(!twoDose.includes(formValue.szczepionka))
+            try {
+              const response = instance({
+                  method: "post",
+                  url: requests.rejestracjaSzczepienie,
+                  data: szczepienieSecond,
+                  headers: { "Content-Type": "application/json", Authorization: 'Bearer ' + sessionStorage.getItem("access") },
+                  
+              })
+              } catch(error) {
+              console.log();
+              }
+
+            if(dosage == 3)
           {
             try {
               const response = instance({
@@ -143,27 +165,34 @@ const Szczepienie = () => {
               console.log();
               }
           }
-            try {
-              const response = instance({
-                  method: "post",
-                  url: requests.rejestracjaSzczepienie,
-                  data: szczepienieSecond,
-                  headers: { "Content-Type": "application/json", Authorization: 'Bearer ' + sessionStorage.getItem("access") },
-                  
-              })
-              } catch(error) {
-              console.log();
-              }
       }
     }
  
-    const handleChange = (event) => {
+    const handleSzczepionkaChange = (event) => {
       setSzczepionkaSelected(event.target.value);
+
       setformValue({
-      ...formValue,
-      [event.target.name]: event.target.value
-      });
+        ...formValue,
+        [event.target.name]: event.target.value
+        });
+
+      for(let i in szczepionki)
+      {
+        if(szczepionki[i].nazwaSzczepionki == event.target.value)
+        {
+          setDosage(szczepionki[i].dawka);
+          return;
+        }
+      }
   }
+
+
+  const handleDataChange = (event) => {
+    setformValue({
+    ...formValue,
+    [event.target.name]: event.target.value
+    });
+}
 
     const handlePunktchange = (event) => {
       setPunktSelected(event.target.value);
@@ -200,11 +229,11 @@ const Szczepienie = () => {
       <div className="szczepienieRegister">
         <form className='szczepienieForm' onSubmit={handleSubmit}>
           <label><h3> Data szczepienia:</h3>
-            <input className='formInput' type="date" name="dataSzczepienia" onChange={handleChange}/>
+            <input className='formInput' type="date" name="dataSzczepienia" onChange={handleDataChange}/>
           </label>
 
           <label> <h3>Szczepionka:</h3>
-          <select className='formInput' name='szczepionka' value={szczepionkaSelected} onChange={handleChange}>
+          <select className='formInput' name='szczepionka' value={szczepionkaSelected} onChange={handleSzczepionkaChange}>
               {szczepionki.map(e => (
                 <option key={e.nazwaSzczepionki} value={e.nazwaSzczepionki} >
                   {e.nazwaSzczepionki}
@@ -225,7 +254,7 @@ const Szczepienie = () => {
             <input type="submit" className='submitbtn' value="Wyślij" />
             {errorMessage?<label className='error'>{errorMessage}</label>:null} 
             <h3>Szczepionka: {szczepionkaSelected}</h3>
-            {twoDose.includes(szczepionkaSelected)
+            {dosage == 2
           ? <h3>Szczepienie będzie składało się<br/> z <u>dwóch</u> dawek szczepionki</h3>
           : <h3>Szczepienie będzie składało się<br/> z <u>trzech</u> dawek szczepionki</h3>
         }

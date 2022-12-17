@@ -13,6 +13,7 @@ import Szczepienie from './Flow/SzczepienieFlow/Szczepienie';
 import SzczepienieLista from './Flow/SzczepienieFlow/SzczepienieLista/SzczepienieLista';
 import PunktDetails from './Components/Punkt/PunktDetails';
 import AddPunkt from './Flow/AdminFlow/AddPunkt';
+import CzyZaszczepiony from './Components/CzyZaszczepiony/CzyZaszczepiony';
 
 
 
@@ -48,6 +49,7 @@ function App() {
             <Route exact path="rejestracjaSzczepienie" element={<Szczepienie/>} />
             <Route exact path="szczepienieList" element={<SzczepienieLista/>} />
             <Route exact path="punktDetails/:idPunkt" element={<PunktDetails/>} />
+            <Route exact path="test" element={<CzyZaszczepiony/>} />
 
             {/* ADMIN */}
             <Route exact path="szczepionkaAdd" element={<AddSzczepionka/>} />
