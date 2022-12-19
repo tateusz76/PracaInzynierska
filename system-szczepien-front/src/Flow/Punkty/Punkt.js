@@ -1,11 +1,10 @@
-import axios from "axios";
 import React from "react";
 import Header from "../../Components/Header/Header";
 import { useEffect, useState } from 'react';
 import requests from "../../Requests";
-import { Link, Navigate } from 'react-router-dom';
 import instance from '../../Axios';
 import GetPunkty from "../../Components/Punkt/GetPunkty";
+import AdminHeader from "../../Components/Header/AdminHeader";
 
 const Punkt= () => {
 
@@ -29,7 +28,10 @@ const Punkt= () => {
 
   return (
     <div className="Punkt">
-        <Header></Header>
+        {sessionStorage.getItem("isAdmin") == "admin"
+        ? <AdminHeader/>
+        : <Header/>
+      }
         {displayPunkty.length > 0 && <h1>Punkty</h1>}
         {displayPunkty.length > 0 ? displayPunkty : <h1>Brak dostępnych punktów w Twojej okolicy</h1>}
         

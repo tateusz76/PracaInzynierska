@@ -1,0 +1,12 @@
+.zaszczepiony {
+  color: green;
+}
+
+.nieZaszczepiony {
+  color: red;
+}
+
+.czyZaszczepiony {
+  display: flex;
+  justify-content: center;
+}

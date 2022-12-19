@@ -1,22 +1,25 @@
-import { useContext, useState, useEffect } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import Header from '../../Components/Header/Header';
-import axios from "axios";
 import React from "react";
 import requests from '../../Requests';
 import './Szczepienie.css';
 import instance from '../../Axios';
-import MapComponent from '../../Components/Punkt/MapComponent';
+import MapComponent from '../../Components/Maps/MapComponent';
 
 const Szczepienie = () => {
+
+    const navigate = useNavigate();
 
     const [patientData, setPatientData] = useState({});
     const [szczepionkaSelected, setSzczepionkaSelected] = useState();
     const [punktSelected, setPunktSelected] = useState();
     let [center, setCenter] = useState();
     const [errorMessage,setError]=useState();
+    let [dosage, setDosage] = useState();
 
-    const twoDose = ["AstraZeneca", "Novavax"];
+    const today = new Date();
+    const date = `${today.getFullYear()}-${today.getMonth()+1}-${today.getDate()}`;
 
     //pobranie danych pacjenta
     useEffect(() => {
@@ -34,7 +37,7 @@ const Szczepienie = () => {
       const [szczepionki, setSzczepionki] = useState([]);
       
       useEffect(() => {
-        instance.get(requests.szczepionki , {
+        instance.get(requests.szczepionkaGet , {
            headers: {
              Authorization: 'Bearer ' + sessionStorage.getItem("access")
             }
@@ -43,6 +46,7 @@ const Szczepienie = () => {
            setSzczepionki(response.data);
            setSzczepionkaSelected(response.data[0].nazwaSzczepionki);
            setformValue(prevValue => ({...prevValue, szczepionka: response.data[0].nazwaSzczepionki}))
+           setDosage(3);
           })
        }, []);
 
@@ -74,80 +78,120 @@ const Szczepienie = () => {
     const handleSubmit = (e) => {
         e.preventDefault();
         const szczepienieData = new FormData();
-        szczepienieData.append("pacjent", patientData.username)
-        szczepienieData.append("dataSzczepienia", formValue.dataSzczepienia)
-        szczepienieData.append("szczepionka", formValue.szczepionka)
-        szczepienieData.append("punkt", formValue.punkt)
-
-        const secondDate = new Date(formValue.dataSzczepienia);
-        secondDate.setDate(secondDate.getDate() + 14);
-        const szczepienieSecond = new FormData();
-        szczepienieSecond.append("pacjent", patientData.username)
-        szczepienieSecond.append("dataSzczepienia", formatDate(secondDate))
-        szczepienieSecond.append("szczepionka", formValue.szczepionka)
-        szczepienieSecond.append("punkt", formValue.punkt)
-
-        const thirdDate = new Date(formValue.dataSzczepienia);
-        thirdDate.setDate(thirdDate.getDate() + 28);
-        const szczepienieThird = new FormData();
-        szczepienieThird.append("pacjent", patientData.username)
-        szczepienieThird.append("dataSzczepienia", formatDate(thirdDate))
-        szczepienieThird.append("szczepionka", formValue.szczepionka)
-        szczepienieThird.append("punkt", formValue.punkt)
-
-        if(szczepienieData.dataSzczepienia == undefined)
+        if(formValue.dataSzczepienia < date)
         {
-          setError('Wystąpił błąd. Upewnij się, że wybrałeś datę szczepienia.');
-          console.log("error");
+          setError('Wystąpił błąd. Upewnij się, że wybrałeś poprawną datę.');
         }
-
-        //request do wysłania formularza
-        try {
-        const response = instance({
-            method: "post",
-            url: requests.rejestracjaSzczepienie,
-            data: szczepienieData,
-            headers: { "Content-Type": "application/json", Authorization: 'Bearer ' + sessionStorage.getItem("access") },
-            
-        })
-        } catch(error) {
-        console.log();
-        }
-
-        if(!twoDose.includes(formValue.szczepionka))
+        else
         {
+          szczepienieData.append("pacjent", patientData.username)
+          szczepienieData.append("dataSzczepienia", formValue.dataSzczepienia)
+          szczepienieData.append("szczepionka", formValue.szczepionka)
+          szczepienieData.append("punkt", formValue.punkt)
+          szczepienieData.append("czyOstatniaDawka", false)
+
+          const secondDate = new Date(formValue.dataSzczepienia);
+          secondDate.setDate(secondDate.getDate() + 14);
+          const szczepienieSecond = new FormData();
+          szczepienieSecond.append("pacjent", patientData.username)
+          szczepienieSecond.append("dataSzczepienia", formatDate(secondDate))
+          szczepienieSecond.append("szczepionka", formValue.szczepionka)
+          szczepienieSecond.append("punkt", formValue.punkt)
+          if(dosage === 2)
+          {
+            szczepienieSecond.append("czyOstatniaDawka", true)
+          }
+          else
+          {
+            szczepienieSecond.append("czyOstatniaDawka", false)
+          }
+
+          const thirdDate = new Date(formValue.dataSzczepienia);
+          thirdDate.setDate(thirdDate.getDate() + 28);
+          const szczepienieThird = new FormData();
+          szczepienieThird.append("pacjent", patientData.username)
+          szczepienieThird.append("dataSzczepienia", formatDate(thirdDate))
+          szczepienieThird.append("szczepionka", formValue.szczepionka)
+          szczepienieThird.append("punkt", formValue.punkt)
+          szczepienieThird.append("czyOstatniaDawka", true)
+
+          if(formValue.dataSzczepienia === '')
+          {
+            setError('Wystąpił błąd. Upewnij się, że wybrałeś poprawną datę.');
+          }
+          else 
+          {
+            setError('');
+            navigate('/szczepienieList');
+          }
+
+          //request do wysłania formularza
           try {
-            const response = instance({
-                method: "post",
-                url: requests.rejestracjaSzczepienie,
-                data: szczepienieThird,
-                headers: { "Content-Type": "application/json", Authorization: 'Bearer ' + sessionStorage.getItem("access") },
-                
-            })
-            } catch(error) {
-            console.log();
-            }
-        }
-          try {
-            const response = instance({
-                method: "post",
-                url: requests.rejestracjaSzczepienie,
-                data: szczepienieSecond,
-                headers: { "Content-Type": "application/json", Authorization: 'Bearer ' + sessionStorage.getItem("access") },
-                
-            })
-            } catch(error) {
-            console.log();
-            }
+          const response = instance({
+              method: "post",
+              url: requests.rejestracjaSzczepienie,
+              data: szczepienieData,
+              headers: { "Content-Type": "application/json", Authorization: 'Bearer ' + sessionStorage.getItem("access") },
+              
+          })
+          } catch(error) {
+          console.log();
+          }
+
+            try {
+              const response = instance({
+                  method: "post",
+                  url: requests.rejestracjaSzczepienie,
+                  data: szczepienieSecond,
+                  headers: { "Content-Type": "application/json", Authorization: 'Bearer ' + sessionStorage.getItem("access") },
+                  
+              })
+              } catch(error) {
+              console.log();
+              }
+
+            if(dosage === 3)
+          {
+            try {
+              const response = instance({
+                  method: "post",
+                  url: requests.rejestracjaSzczepienie,
+                  data: szczepienieThird,
+                  headers: { "Content-Type": "application/json", Authorization: 'Bearer ' + sessionStorage.getItem("access") },
+                  
+              })
+              } catch(error) {
+              console.log();
+              }
+          }
+      }
     }
  
-    const handleChange = (event) => {
+    const handleSzczepionkaChange = (event) => {
       setSzczepionkaSelected(event.target.value);
+
       setformValue({
-      ...formValue,
-      [event.target.name]: event.target.value
-      });
+        ...formValue,
+        [event.target.name]: event.target.value
+        });
+
+      for(let i in szczepionki)
+      {
+        if(szczepionki[i].nazwaSzczepionki === event.target.value)
+        {
+          setDosage(szczepionki[i].dawka);
+          return;
+        }
+      }
   }
+
+
+  const handleDataChange = (event) => {
+    setformValue({
+    ...formValue,
+    [event.target.name]: event.target.value
+    });
+}
 
     const handlePunktchange = (event) => {
       setPunktSelected(event.target.value);
@@ -184,11 +228,11 @@ const Szczepienie = () => {
       <div className="szczepienieRegister">
         <form className='szczepienieForm' onSubmit={handleSubmit}>
           <label><h3> Data szczepienia:</h3>
-            <input className='formInput' type="date" name="dataSzczepienia" onChange={handleChange}/>
+            <input className='formInput' type="date" name="dataSzczepienia" onChange={handleDataChange}/>
           </label>
 
           <label> <h3>Szczepionka:</h3>
-          <select className='formInput' name='szczepionka' value={szczepionkaSelected} onChange={handleChange}>
+          <select className='formInput' name='szczepionka' value={szczepionkaSelected} onChange={handleSzczepionkaChange}>
               {szczepionki.map(e => (
                 <option key={e.nazwaSzczepionki} value={e.nazwaSzczepionki} >
                   {e.nazwaSzczepionki}
@@ -209,7 +253,7 @@ const Szczepienie = () => {
             <input type="submit" className='submitbtn' value="Wyślij" />
             {errorMessage?<label className='error'>{errorMessage}</label>:null} 
             <h3>Szczepionka: {szczepionkaSelected}</h3>
-            {twoDose.includes(szczepionkaSelected)
+            {dosage === 2
           ? <h3>Szczepienie będzie składało się<br/> z <u>dwóch</u> dawek szczepionki</h3>
           : <h3>Szczepienie będzie składało się<br/> z <u>trzech</u> dawek szczepionki</h3>
         }

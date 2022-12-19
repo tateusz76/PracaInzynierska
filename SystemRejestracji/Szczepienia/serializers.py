@@ -6,7 +6,7 @@ class PacjentSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Pacjent
-        fields = '__all__'
+        fields = ['username', 'first_name', 'last_name', 'email', 'is_staff']
 
 
 class PatientEditProfileSerializer(serializers.ModelSerializer):
@@ -26,7 +26,7 @@ class SzczepionkaSerializer(serializers.HyperlinkedModelSerializer):
 
     class Meta:
         model = Szczepionka
-        fields = ['id', 'nazwaSzczepionki']
+        fields = ['id', 'nazwaSzczepionki', 'dawka']
 
 
 class SzczepienieSerializer(serializers.HyperlinkedModelSerializer):
@@ -38,6 +38,12 @@ class SzczepienieSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Szczepienie
         fields = ['id', 'pacjent', 'dataSzczepienia', 'szczepionka', 'punkt', 'czyOstatniaDawka']
+
+
+class SzczepienieEditDateSerializer(serializers.HyperlinkedModelSerializer):
+    class Meta:
+        model = Szczepienie
+        fields = ['id', 'dataSzczepienia']
 
 
 # class ZaszczepionySerializer(serializers.HyperlinkedModelSerializer):

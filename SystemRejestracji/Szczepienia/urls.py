@@ -8,6 +8,7 @@ urlpatterns = [
     # path('pacjent/<int:pk>', views.PacjentDetail.as_view(), name='pacjent-details'),
     path('szczepionka', views.SzczepionkaList.as_view(), name='szczepionka-list'),
     path('szczepionka/<int:pk>', views.SzczepionkaDetail.as_view(), name='szczepionka-details'),
+    path('szczepionkaGet', views.SzczepionkaGet.as_view(), name='szczepionka-get'),
     path('szczepienie', views.SzczepienieList.as_view(), name='szczepienie-list'),
     path('szczepienie/<int:pk>', views.SzczepienieDetail.as_view(), name='szczepienie-details'),
     # path('zaszczepiony', views.ZaszczepionyList.as_view(), name='zaszczepiony-list'),
@@ -17,9 +18,12 @@ urlpatterns = [
     path('getPunkty', views.GetPunkty.as_view(), name='punkt-get'),
     path('getPunkty/<int:pk>', views.GetPunktyDetail.as_view(), name='punkt-get-details'),
     path('getSzczepienie', views.GetSzczepienie.as_view(), name='szczepienie-get'),
+    path('editDate/<int:pk>', views.EditSzczepienieDate.as_view(), name='szczepienie-edit-date'),
     #path('', views.ApiRoot.as_view(), name=views.ApiRoot.name),
     path('', include('djoser.urls')),
     path('', include('djoser.urls.authtoken')),
 
     path('edit', views.PatientProfileEdit.as_view(), name='edit-profile'),
+
+    path('userList', views.UserList.as_view(), name='user-list'),
 ]
