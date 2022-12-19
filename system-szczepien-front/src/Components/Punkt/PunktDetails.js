@@ -4,7 +4,8 @@ import requests from '../../Requests';
 import instance from '../../Axios';
 import {useParams} from 'react-router-dom';
 import Header from "../Header/Header";
-import MapComponent from "./MapComponent";
+import MapComponent from "../Maps/MapComponent";
+import AdminHeader from "../../Components/Header/AdminHeader";
 
 const PunktDetails= () => {       
     
@@ -29,7 +30,10 @@ const PunktDetails= () => {
 
     return (
         <div className="Punkt">
-            <Header></Header>
+            {sessionStorage.getItem("isAdmin") == "admin"
+                ? <AdminHeader/>
+                : <Header/>
+            }
             <h1>{punktData.nazwa} {punktData.miasto} {punktData.ulica} {punktData.numer}</h1><br/>
 
             <MapComponent center = {center}/>

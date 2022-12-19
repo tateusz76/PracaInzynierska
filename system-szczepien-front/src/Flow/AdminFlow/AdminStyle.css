@@ -1,0 +1,44 @@
+.AddPunkt {
+  display: flex;
+  justify-content: space-around;
+}
+
+.AddSzczepionka {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.dawki {
+  width: 5vh;
+  height: 3vh;
+  align-items: center;
+}
+
+.submitbtn {
+  background-color: #33a036;
+  color: white;
+  padding: 15px 32px;
+}
+
+.submitbtn:hover {
+  box-shadow: 0 12px 16px 0 rgba(0, 0, 0, 0.24), 0 17px 50px 0 rgba(0, 0, 0, 0.19);
+}
+
+input[type=text], input[type=number] {
+  padding: 15px;
+  margin: 5px 0 22px 0;
+  border: none;
+  background: #f1f1f1;
+  width: 50vh;
+  height: 5vh;
+}
+
+.headerAddPunkt {
+  display: flex;
+  justify-content: center;
+}
+
+.mapa {
+  margin-top: 50px;
+}

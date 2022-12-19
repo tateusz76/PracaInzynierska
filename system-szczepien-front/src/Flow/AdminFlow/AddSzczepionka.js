@@ -1,14 +1,11 @@
-import Header from "../../Components/Header/Header";
-import axios from "axios";
 import React from "react";
 import requests from "../../Requests";
 import instance from "../../Axios";
 import AdminHeader from "../../Components/Header/AdminHeader";
-
+import './AdminStyle.css';
 
 
 function AddSzczepionka() {
-
 
   const [formValue, setformValue] = React.useState({
     nazwaSzczepionki: '',
@@ -43,19 +40,20 @@ function AddSzczepionka() {
 
 
   return (
-    <div className="AddSzczepionka">
+    <div>
       <AdminHeader/>
+      <div className="AddSzczepionka">
       <h1>Dodaj szczepionkę</h1>
-
-      <form onSubmit={handleSubmit}>
-        <label> Nazwa szczepionki:
-          <input type="text" name="nazwaSzczepionki"  onChange={handleChange}/>
-        </label>
-        <label> Ilość dawek:
-          <input type="number" name="dawkaSzczepionki"  onChange={handleChange}/>
-        </label>
-        <input type="submit" value="Wyślij" />
-      </form>
+        <form onSubmit={handleSubmit}>
+          <label> Nazwa szczepionki:
+            <input type="text" name="nazwaSzczepionki"  onChange={handleChange}/>
+          </label>
+          <label> Ilość dawek:
+            <input className="dawki" type="number" name="dawkaSzczepionki"  onChange={handleChange}/>
+          </label>
+          <input className="submitbtn" type="submit" value="Wyślij" />
+        </form>
+      </div>
     </div>
   );
 }

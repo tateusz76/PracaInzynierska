@@ -1,12 +1,11 @@
-import { useContext, useState, useEffect } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import Header from '../../Components/Header/Header';
-import axios from "axios";
 import React from "react";
 import requests from '../../Requests';
 import './Szczepienie.css';
 import instance from '../../Axios';
-import MapComponent from '../../Components/Punkt/MapComponent';
+import MapComponent from '../../Components/Maps/MapComponent';
 
 const Szczepienie = () => {
 
@@ -98,7 +97,7 @@ const Szczepienie = () => {
           szczepienieSecond.append("dataSzczepienia", formatDate(secondDate))
           szczepienieSecond.append("szczepionka", formValue.szczepionka)
           szczepienieSecond.append("punkt", formValue.punkt)
-          if(dosage == 2)
+          if(dosage === 2)
           {
             szczepienieSecond.append("czyOstatniaDawka", true)
           }
@@ -116,7 +115,7 @@ const Szczepienie = () => {
           szczepienieThird.append("punkt", formValue.punkt)
           szczepienieThird.append("czyOstatniaDawka", true)
 
-          if(formValue.dataSzczepienia == '')
+          if(formValue.dataSzczepienia === '')
           {
             setError('Wystąpił błąd. Upewnij się, że wybrałeś poprawną datę.');
           }
@@ -151,7 +150,7 @@ const Szczepienie = () => {
               console.log();
               }
 
-            if(dosage == 3)
+            if(dosage === 3)
           {
             try {
               const response = instance({
@@ -178,7 +177,7 @@ const Szczepienie = () => {
 
       for(let i in szczepionki)
       {
-        if(szczepionki[i].nazwaSzczepionki == event.target.value)
+        if(szczepionki[i].nazwaSzczepionki === event.target.value)
         {
           setDosage(szczepionki[i].dawka);
           return;
@@ -254,7 +253,7 @@ const Szczepienie = () => {
             <input type="submit" className='submitbtn' value="Wyślij" />
             {errorMessage?<label className='error'>{errorMessage}</label>:null} 
             <h3>Szczepionka: {szczepionkaSelected}</h3>
-            {dosage == 2
+            {dosage === 2
           ? <h3>Szczepienie będzie składało się<br/> z <u>dwóch</u> dawek szczepionki</h3>
           : <h3>Szczepienie będzie składało się<br/> z <u>trzech</u> dawek szczepionki</h3>
         }

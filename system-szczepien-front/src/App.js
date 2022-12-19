@@ -2,7 +2,7 @@ import './App.css';
 import React from "react";
 import {useState } from 'react';
 import AddSzczepionka from './Flow/AdminFlow/AddSzczepionka';
-import {BrowserRouter as Router, Route, Routes, Link, useNavigate, useParams} from 'react-router-dom';
+import {BrowserRouter as Router, Route, Routes} from 'react-router-dom';
 import Login from './Flow/Login/Login';
 import Register from './Flow/Register/Register';
 import Logout from './Flow/Login/Logout';
@@ -13,7 +13,6 @@ import Szczepienie from './Flow/SzczepienieFlow/Szczepienie';
 import SzczepienieLista from './Flow/SzczepienieFlow/SzczepienieLista/SzczepienieLista';
 import PunktDetails from './Components/Punkt/PunktDetails';
 import AddPunkt from './Flow/AdminFlow/AddPunkt';
-import CzyZaszczepiony from './Components/CzyZaszczepiony/CzyZaszczepiony';
 
 
 
@@ -49,7 +48,6 @@ function App() {
             <Route exact path="rejestracjaSzczepienie" element={<Szczepienie/>} />
             <Route exact path="szczepienieList" element={<SzczepienieLista/>} />
             <Route exact path="punktDetails/:idPunkt" element={<PunktDetails/>} />
-            <Route exact path="test" element={<CzyZaszczepiony/>} />
 
             {/* ADMIN */}
             <Route exact path="szczepionkaAdd" element={<AddSzczepionka/>} />
