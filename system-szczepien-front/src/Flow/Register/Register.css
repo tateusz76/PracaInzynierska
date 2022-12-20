@@ -16,6 +16,7 @@ input[type=text], input[type=password], input[type=email] {
   background: #f1f1f1;
   width: 50vh;
   height: 5vh;
+  border-radius: 5pt;
 }
 
 input[type=text]:focus, input[type=password]:focus, input[type=email]:focus {
@@ -24,18 +25,18 @@ input[type=text]:focus, input[type=password]:focus, input[type=email]:focus {
 }
 
 .registerbtn {
-  background-color: #04AA6D;
-  color: white;
   padding: 16px 20px;
   margin: 8px 0;
-  border: none;
   cursor: pointer;
   width: 30vh;
   opacity: 0.9;
+  background-color: #33a036;
+  color: white;
+  border-radius: 3pt;
 }
 
 .registerbtn:hover {
-  opacity: 1;
+  box-shadow: 0 12px 16px 0 rgba(0, 0, 0, 0.24), 0 17px 50px 0 rgba(0, 0, 0, 0.19);
 }
 
 a {
