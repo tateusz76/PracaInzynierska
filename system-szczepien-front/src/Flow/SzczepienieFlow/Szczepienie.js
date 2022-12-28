@@ -242,7 +242,7 @@ const Szczepienie = () => {
             </select>
           </label>
 
-          <label> <h3>Punkt Szczepień:</h3>
+          <label> <h3>Wybierz Punkt Szczepień:</h3>
           <select className='formInput' name='punkt'  value={punktSelected} onChange={handlePunktchange}>
               {punkty.map(e => (
                 <option key={e.nazwa} value={e.nazwa}>
