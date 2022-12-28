@@ -8,7 +8,7 @@ import datetime
 
 class Szczepionka(models.Model):
     nazwaSzczepionki = models.CharField(max_length=45, unique=True)
-    dawka = models.IntegerField(default=3)
+    dawka = models.IntegerField()
 
     def __str__(self):
         return self.nazwaSzczepionki

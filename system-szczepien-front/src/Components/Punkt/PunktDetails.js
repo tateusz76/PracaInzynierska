@@ -6,6 +6,7 @@ import {useParams} from 'react-router-dom';
 import Header from "../Header/Header";
 import MapComponent from "../Maps/MapComponent";
 import AdminHeader from "../../Components/Header/AdminHeader";
+import './Punkty.css';
 
 const PunktDetails= () => {       
     
@@ -29,14 +30,18 @@ const PunktDetails= () => {
     console.log(center);
 
     return (
-        <div className="Punkt">
+        <div className="PunktDetails">
             {sessionStorage.getItem("isAdmin") == "admin"
                 ? <AdminHeader/>
                 : <Header/>
             }
-            <h1>{punktData.nazwa} {punktData.miasto} {punktData.ulica} {punktData.numer}</h1><br/>
+            <div className="PunktDetailsContent">
+                <h1 className="punktDetailsH1"> {punktData.nazwa}</h1>
+                <h1 className="punktDetailsH1"> Miasto: {punktData.miasto}</h1>
+                <h1 className="punktDetailsH1"> Lokalizacja: ul. {punktData.ulica} {punktData.numer}</h1>
 
-            <MapComponent center = {center}/>
+                <MapComponent center = {center}/>
+            </div>
         </div>
     );
 }

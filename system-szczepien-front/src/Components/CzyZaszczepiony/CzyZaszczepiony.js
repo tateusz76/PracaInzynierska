@@ -36,11 +36,15 @@ const CzyZaszczepiony= () => {
 
     szczepienieData.sort((a, b) => new Date(a.id) - new Date(b.id))
 
+    console.log(szczepienieData[0]);
+
+
     return (
         <div className="czyZaszczepiony">
             {szczepienieData && szczepienieData[index] && szczepienieData[index].czyOstatniaDawka && szczepienieData[index].czyOstatniaDawka == true && szczepienieData[index].dataSzczepienia <  date && <h1 className="zaszczepiony">ZASZCZEPIONY</h1>}
             {szczepienieData && szczepienieData[index] && szczepienieData[index].czyOstatniaDawka && szczepienieData[index].czyOstatniaDawka == false && szczepienieData[index].dataSzczepienia <  date &&<h1 className="nieZaszczepiony">NIE ZASZCZEPIONY</h1>}
             {szczepienieData && szczepienieData[index] && szczepienieData[index].czyOstatniaDawka && szczepienieData[index].czyOstatniaDawka == true && szczepienieData[index].dataSzczepienia >  date &&<h1 className="nieZaszczepiony">NIE ZASZCZEPIONY</h1>}
+            {szczepienieData && szczepienieData[index] && szczepienieData[index].czyOstatniaDawka && szczepienieData[index].czyOstatniaDawka == false && szczepienieData[index].dataSzczepienia <  date && <h1 className="nieZaszczepiony">NIE ZASZCZEPIONY</h1>}
             {szczepienieData && szczepienieData == '' && <h1 className="nieZaszczepiony">NIE ZASZCZEPIONY</h1>}
         </div>
     );

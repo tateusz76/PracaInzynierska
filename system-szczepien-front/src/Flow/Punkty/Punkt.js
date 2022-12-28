@@ -5,6 +5,7 @@ import requests from "../../Requests";
 import instance from '../../Axios';
 import GetPunkty from "../../Components/Punkt/GetPunkty";
 import AdminHeader from "../../Components/Header/AdminHeader";
+import './Punkt.css';
 
 const Punkt= () => {
 
@@ -27,14 +28,15 @@ const Punkt= () => {
         
 
   return (
-    <div className="Punkt">
+    <div>
         {sessionStorage.getItem("isAdmin") == "admin"
         ? <AdminHeader/>
         : <Header/>
       }
-        {displayPunkty.length > 0 && <h1>Punkty</h1>}
+        {displayPunkty.length > 0 && <h1 className="punktyHeader">Punkty szczepień</h1>}
+      <div className="PunktDisplay">
         {displayPunkty.length > 0 ? displayPunkty : <h1>Brak dostępnych punktów w Twojej okolicy</h1>}
-        
+      </div>
     </div>
   );
 }
