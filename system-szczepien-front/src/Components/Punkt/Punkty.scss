@@ -1,5 +1,17 @@
-.punktH1:hover
+.punktDiv
 {
-    color: rgb(104, 104, 104);
+    border-style: solid;
+    padding: 2vh;
+    margin: 2vh;
+}
+
+.punktDiv:hover
+{
     cursor: pointer;
+    background-color: rgba(0, 0, 0, 0.064);
+}
+
+.PunktDetailsContent
+{
+    text-align: center;
 }

@@ -1,9 +1,10 @@
 import axios from "axios";
 import React from "react";
 import Header from "../../../Components/Header/Header";
+import AdminHeader from "../../../Components/Header/AdminHeader";
 import requests from "../../../Requests";
 import instance from '../../../Axios';
-
+import '../PatientProfile.css';
 
 const PatientEditProfile= () => {
 
@@ -38,16 +39,20 @@ const PatientEditProfile= () => {
       
 
   return (
-    <div className="PatientProfile">
-        <Header></Header>
-        <h1 className='PatientEditProfile--header'>Edycja profilu</h1>
-
-        <form onSubmit={handleSubmit}>
-            <label> Nazwa użytkownika:
-                <input type="text" name="username"  onChange={handleChange}/>
-            </label>
-            <input type="submit" className='submitbtn' value="Wyślij" />
-        </form>
+    <div className="PatientProfileEdit">
+        {sessionStorage.getItem("isAdmin") == "admin"
+                ? <AdminHeader/>
+                : <Header/>
+            }
+        <div className="EditForm">
+          <h1 className='PatientEditProfile--header'>Edycja profilu</h1>
+          <form onSubmit={handleSubmit}>
+              <label> Nazwa użytkownika:
+                  <input type="text" name="username"  onChange={handleChange}/>
+              </label>
+              <input type="submit" className='submitbtn' value="Wyślij" />
+          </form>
+        </div>
     </div>
   );
 

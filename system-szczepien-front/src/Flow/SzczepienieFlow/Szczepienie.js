@@ -46,7 +46,7 @@ const Szczepienie = () => {
            setSzczepionki(response.data);
            setSzczepionkaSelected(response.data[0].nazwaSzczepionki);
            setformValue(prevValue => ({...prevValue, szczepionka: response.data[0].nazwaSzczepionki}))
-           setDosage(3);
+           setDosage(response.data[0].dawka);
           })
        }, []);
 
@@ -220,6 +220,7 @@ const Szczepienie = () => {
 
     return [year, month, day].join('-');
 }
+
 
   return (
     <div className="szczepienie">

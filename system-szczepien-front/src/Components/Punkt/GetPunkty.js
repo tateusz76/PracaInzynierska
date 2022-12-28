@@ -13,8 +13,10 @@ const GetPunkty= ({id, nazwa, miasto, ulica, numer}) => {
 
 
   return (
-    <div className="Punkt"  onClick={openPunktDetails}>
-        <h1 className="punktH1">{nazwa} {miasto} {ulica} {numer}</h1><br/>
+    <div className="punktDiv"  onClick={openPunktDetails}>
+        <h1 className="punktH1">{nazwa} </h1>
+        <h1 className="punktH1">Miasto: {miasto}</h1>
+        <h1 className="punktH1">Lokalizacja: ul. {ulica} {numer}</h1>
     </div>
   );
 }
