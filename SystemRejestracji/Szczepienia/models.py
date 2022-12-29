@@ -57,12 +57,23 @@ class Punkt(models.Model):
     centerX = models.FloatField(null=True)
     centerY = models.FloatField(null=True)
 
-
     def __str__(self):
         return str(self.nazwa) + ' ' + str(self.miasto) + ' ' + str(self.ulica) + ' ' + str(self.numer)
 
     class Meta:
         verbose_name_plural = "Punkty szczepień"
+
+
+class Pracownik(models.Model):
+    #pracownik = models.OneToOneField(Pacjent, on_delete=models.DO_NOTHING)
+    pracownik = models.ForeignKey(Pacjent, related_name='ktoPracuje', on_delete=models.DO_NOTHING, default=0)
+    punkt = models.ForeignKey(Punkt, related_name='gdziePracuje', on_delete=models.DO_NOTHING, default=0)
+
+    def __str__(self):
+        return str(self.pracownik.first_name) + ' ' + str(self.pracownik.last_name)
+
+    class Meta:
+        verbose_name_plural = "Pracownicy punktów"
 
 
 class Szczepienie(models.Model):

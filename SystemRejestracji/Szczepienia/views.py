@@ -144,6 +144,20 @@ class EditSzczepienieDate(generics.RetrieveUpdateDestroyAPIView):
         return Szczepienie.objects.filter(pacjent=user)
 
 
+class PracownikList(generics.ListCreateAPIView):
+    queryset = Pracownik.objects.all()
+    serializer_class = PracownikSerializer
+    permission_classes = (IsAuthenticated, IsOwnedByUser)
+    name = 'pracownik-list'
+
+
+class PracownikDetails(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Pracownik.objects.all()
+    serializer_class = PracownikSerializer
+    permission_classes = (IsAuthenticated, IsOwnedByUser)
+    name = 'pracownik-details'
+
+
 class ApiRoot(generics.GenericAPIView):
     name = 'api-root'
 
