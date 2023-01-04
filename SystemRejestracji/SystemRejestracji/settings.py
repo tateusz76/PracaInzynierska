@@ -100,9 +100,7 @@ REST_FRAMEWORK = {
         'rest_framework_simplejwt.authentication.JWTAuthentication',
     ),
     'DEFAULT_PERMISSIONS_CLASSES': (
-        # 'rest_framework.permissions.IsAuthenticated',
-        # 'rest_framework.permissions.IsAuthenticatedOrReadOnly',
-        # 'Szczepienia.permissions.IsOwnerOrReadOnly',
+        'rest_framework.permissions.IsAuthenticated',
     )
 }
 
