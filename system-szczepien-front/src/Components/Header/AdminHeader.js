@@ -10,6 +10,7 @@ const AdminHeader = () => {
         sessionStorage.removeItem('access');
         sessionStorage.removeItem('refresh');
         sessionStorage.removeItem('isAdmin');
+        sessionStorage.removeItem('isPracownik');
       };
 
     let [isLoggedIn, setLoggedStatus] = useState(false);

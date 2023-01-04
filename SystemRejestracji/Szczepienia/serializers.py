@@ -6,7 +6,7 @@ class PacjentSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Pacjent
-        fields = ['username', 'first_name', 'last_name', 'email', 'is_staff']
+        fields = ['id', 'username', 'first_name', 'last_name', 'email', 'is_staff']
 
 
 class PracownikSerializer(serializers.ModelSerializer):
@@ -16,8 +16,8 @@ class PracownikSerializer(serializers.ModelSerializer):
     punkt = serializers.SlugRelatedField(queryset=Punkt.objects.all(), slug_field='nazwa')
 
     class Meta:
-        model = Pacjent
-        fields = ('id','pracownik', 'punkt')
+        model = Pracownik
+        fields = ('id', 'pracownik', 'punkt')
 
     def create(self, validated_data):
         return Pracownik.objects.create(**validated_data)

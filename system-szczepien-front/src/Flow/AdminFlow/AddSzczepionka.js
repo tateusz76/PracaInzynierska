@@ -18,8 +18,6 @@ function AddSzczepionka() {
     vaccineData.append("nazwaSzczepionki", formValue.nazwaSzczepionki)
     vaccineData.append("dawka", formValue.dawka)
 
-    console.log(formValue);
-
     try {
       const response = instance({
         method: "post",
@@ -45,8 +43,6 @@ function AddSzczepionka() {
       [event.target.name]: parseInt(event.target.value)
     });
   }
-
-  console.log(typeof formValue.dawkaSzczepionki);
 
   return (
     <div>

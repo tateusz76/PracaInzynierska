@@ -27,8 +27,6 @@ const PunktDetails= () => {
         });
     }, []);
 
-    console.log(center);
-
     return (
         <div className="PunktDetails">
             {sessionStorage.getItem("isAdmin") == "admin"
