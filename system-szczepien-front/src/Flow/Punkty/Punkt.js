@@ -33,7 +33,7 @@ const Punkt= () => {
         ? <AdminHeader/>
         : <Header/>
       }
-        {displayPunkty.length > 0 && <h1 className="punktyHeader">Punkty szczepień</h1>}
+        {displayPunkty.length > 0 && <h1 className="punktyHeader">Dostęne punkty szczepień</h1>}
       <div className="PunktDisplay">
         {displayPunkty.length > 0 ? displayPunkty : <h1>Brak dostępnych punktów w Twojej okolicy</h1>}
       </div>

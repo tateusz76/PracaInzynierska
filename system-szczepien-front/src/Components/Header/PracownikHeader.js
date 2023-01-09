@@ -11,6 +11,7 @@ const PracownikHeader = () => {
         sessionStorage.removeItem('refresh');
         sessionStorage.removeItem('isAdmin');
         sessionStorage.removeItem('isPracownik');
+        sessionStorage.removeItem('punkt');
       };
 
     let [isLoggedIn, setLoggedStatus] = useState(false);
@@ -19,8 +20,6 @@ const PracownikHeader = () => {
     {
         isLoggedIn = true;
     }
-
-    const navigate = useNavigate();
     
 
     return (

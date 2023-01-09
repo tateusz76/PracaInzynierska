@@ -13,6 +13,7 @@ const requests = {
     //ADMIN 
     szczepionka: 'http://127.0.0.1:8000/szczepienia/szczepionka',
     punkt: 'http://127.0.0.1:8000/szczepienia/punkt',
+    editPunkt: 'http://127.0.0.1:8000/szczepienia/punkt/',
 
     //PRACOWNIK
     szczepienieByPunkt: 'http://127.0.0.1:8000/szczepienia/getSzczepienieByPunkt',

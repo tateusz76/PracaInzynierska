@@ -11,6 +11,7 @@ const Header = () => {
         sessionStorage.removeItem('refresh');
         sessionStorage.removeItem('isAdmin');
         sessionStorage.removeItem('isPracownik');
+        sessionStorage.removeItem('punkt');
       };
 
     let [isLoggedIn, setLoggedStatus] = useState(false);
@@ -19,8 +20,6 @@ const Header = () => {
     {
         isLoggedIn = true;
     }
-
-    const navigate = useNavigate();
     
 
     return (
