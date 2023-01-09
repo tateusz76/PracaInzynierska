@@ -8,9 +8,15 @@ const GetPunkty= ({id, nazwa, miasto, ulica, numer}) => {
   const navigate = useNavigate();
 
   const openPunktDetails = () => { 
-    navigate(`/punktDetails/${id}`);
+    if(sessionStorage.getItem("isAdmin") == "admin")
+    {
+      navigate(`/punktEdit/${id}`);
+    }
+    else
+    {
+      navigate(`/punktDetails/${id}`);
+    }
   };
-
 
   return (
     <div className="punktDiv"  onClick={openPunktDetails}>

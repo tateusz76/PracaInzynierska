@@ -37,7 +37,6 @@ const SzczepienieLista= () => {
         return new Date(e.dataSzczepienia) >= new Date(date);
       })
       
-      // console.log(nextSzczepienia.sort((a, b) => new Date(a.dataSzczepienia) - new Date(b.dataSzczepienia)))
 
       const displaySzczepienie = pastSzczepienia.sort((a, b) => new Date(a.dataSzczepienia) - new Date(b.dataSzczepienia)).map(e => {
           return <GetSzczepienie key={e.id} data={e.dataSzczepienia} szczepionka={e.szczepionka} punkt={e.punkt}/>
@@ -80,7 +79,7 @@ const SzczepienieLista= () => {
           {displayNext.length > 0 ? displayNext : <u><h1>Brak nadchodzących szczepień</h1></u>}
           
           {displaySzczepienie.length <= 0 && displayNext.length > 0 && <p>Jeśli nie otrzymałeś jeszcze pierwszej dawki, możesz anulować szczepienie w celu ponownej rejestracji lub wycofania się ze szczepienia.</p>}
-          {displaySzczepienie.length <= 0 && displayNext.length > 0 && <button onClick={handleDelete}>Anuluj zapis na szczepienie</button>}
+          {displaySzczepienie.length <= 0 && displayNext.length > 0 && <button className="submitbtn" onClick={handleDelete}>Anuluj zapis na szczepienie</button>}
         </div>
     </div>
   );

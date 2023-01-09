@@ -78,7 +78,7 @@ const Szczepienie = () => {
     const handleSubmit = (e) => {
         e.preventDefault();
         const szczepienieData = new FormData();
-        if(formValue.dataSzczepienia < date)
+        if(new Date(formValue.dataSzczepienia) < new Date(date))
         {
           setError('Wystąpił błąd. Upewnij się, że wybrałeś poprawną datę.');
         }

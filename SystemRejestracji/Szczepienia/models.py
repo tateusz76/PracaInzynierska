@@ -17,18 +17,6 @@ class Szczepionka(models.Model):
         verbose_name_plural = "Szczepionki"
 
 
-# class Zaszczepiony(models.Model):
-#     imie = models.CharField(max_length=45)
-#     nazwisko = models.CharField(max_length=45)
-#     pesel = models.CharField(max_length=11, unique=True)
-#
-#     def __str__(self):
-#         return self.imie + ' ' + self.nazwisko
-#
-#     class Meta:
-#         verbose_name_plural = "Zaszczepieni"
-
-
 class Pacjent(AbstractUser):
     email = models.EmailField(max_length=45, unique=True)
     is_staff = models.BooleanField(default=False)
@@ -40,10 +28,6 @@ class Pacjent(AbstractUser):
 
     def __str__(self):
         return self.first_name + ' ' + self.last_name
-
-    # def delete(self, *args, **kwargs):
-    #     Zaszczepiony.objects.create(imie=self.first_name, nazwisko=self.last_name, pesel = self.pesel)
-    #     super().delete(*args, **kwargs)
 
     class Meta:
         verbose_name_plural = "Pacjenci"
@@ -57,12 +41,23 @@ class Punkt(models.Model):
     centerX = models.FloatField(null=True)
     centerY = models.FloatField(null=True)
 
-
     def __str__(self):
         return str(self.nazwa) + ' ' + str(self.miasto) + ' ' + str(self.ulica) + ' ' + str(self.numer)
 
     class Meta:
         verbose_name_plural = "Punkty szczepień"
+
+
+class Pracownik(models.Model):
+    #pracownik = models.OneToOneField(Pacjent, on_delete=models.DO_NOTHING)
+    pracownik = models.ForeignKey(Pacjent, related_name='ktoPracuje', on_delete=models.DO_NOTHING, default=0)
+    punkt = models.ForeignKey(Punkt, related_name='gdziePracuje', on_delete=models.DO_NOTHING, default=0)
+
+    def __str__(self):
+        return str(self.pracownik.first_name) + ' ' + str(self.pracownik.last_name)
+
+    class Meta:
+        verbose_name_plural = "Pracownicy punktów"
 
 
 class Szczepienie(models.Model):

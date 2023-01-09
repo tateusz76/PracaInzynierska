@@ -7,8 +7,9 @@ from rest_framework.response import Response
 from rest_framework.reverse import reverse
 from rest_framework.permissions import AllowAny, IsAdminUser
 from rest_framework.permissions import IsAuthenticated
-from Szczepienia.permissions import IsOwnedByUser
+from Szczepienia.permissions import *
 from django.shortcuts import get_list_or_404, get_object_or_404
+from django.db.models import Q
 
 # Create your views here.
 
@@ -133,6 +134,13 @@ class GetSzczepienie(generics.ListAPIView):
         return Szczepienie.objects.filter(pacjent=user)
 
 
+class GetSzczepienieByPunkt(generics.ListAPIView):
+    queryset = Szczepienie.objects.all()
+    serializer_class = SzczepienieSerializer
+    permission_classes = (IsAuthenticated,)
+    name = 'szczepienie-get'
+
+
 class EditSzczepienieDate(generics.RetrieveUpdateDestroyAPIView):
     queryset = Szczepienie.objects.all()
     serializer_class = SzczepienieEditDateSerializer
@@ -142,6 +150,41 @@ class EditSzczepienieDate(generics.RetrieveUpdateDestroyAPIView):
     def get_queryset(self):
         user = self.request.user
         return Szczepienie.objects.filter(pacjent=user)
+
+
+class PracownikAdd(generics.ListCreateAPIView):
+    queryset = Pracownik.objects.all()
+    serializer_class = PracownikSerializer
+    permission_classes = (IsAuthenticated, IsAdminUser)
+    name = 'pracownik-add'
+
+
+class PracownikDetails(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Pracownik.objects.all()
+    serializer_class = PracownikSerializer
+    permission_classes = (IsAuthenticated, IsAdminUser)
+    name = 'pracownik-details'
+
+
+class PracownikList(generics.ListAPIView):
+    queryset = Pracownik.objects.all()
+    serializer_class = PracownikSerializer
+    permission_classes = (IsAuthenticated, IsPracownik)
+    name = 'pracownik-list'
+
+    def get_queryset(self):
+        user = self.request.user
+        return Pracownik.objects.filter(pracownik=user)
+
+
+class PacjentListView(generics.ListAPIView):
+    serializer_class = PacjentSerializer
+    permission_classes = (IsAuthenticated, IsPracownik)
+    name = 'pacjent-list-view'
+
+    def get_queryset(self):
+        user = self.request.user.username
+        return Pacjent.objects.all().filter(~Q(username=user), ~Q(is_staff=True))
 
 
 class ApiRoot(generics.GenericAPIView):

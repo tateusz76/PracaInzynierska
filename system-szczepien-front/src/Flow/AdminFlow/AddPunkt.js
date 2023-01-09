@@ -4,14 +4,15 @@ import AdminHeader from "../../Components/Header/AdminHeader";
 import './AdminStyle.css';
 import { Map, Draggable, Marker } from "pigeon-maps";
 import React, { useState } from "react";
+import {useNavigate} from 'react-router-dom';
 
 
 function AddPunkt() {
+  const navigate = useNavigate();
 
   const [anchor, setAnchor] = useState([53.7633, 20.4847]);
   const [hue, setHue] = useState(0)
   const color = `hsl(${hue % 360}deg 39% 70%)`
-  const [zoom, setZoom] = useState()
 
   const [formValue, setformValue] = React.useState({
     nazwa: '',
@@ -22,7 +23,7 @@ function AddPunkt() {
     centerY: '',
   });
 
-  const handleSubmit = async() => {
+  const handleSubmit = () => {
     formValue.centerX = (anchor[0].toFixed(4)) - 0.0002;
     formValue.centerY = (anchor[1].toFixed(4)) - (-0.0001);
     const punktData = new FormData();
@@ -34,7 +35,7 @@ function AddPunkt() {
     punktData.append("centerY", formValue.centerY)
 
     try {
-      const response = await instance({
+      const response = instance({
         method: "post",
         url: requests.punkt,
         data: punktData,
@@ -43,6 +44,7 @@ function AddPunkt() {
     } catch(error) {
       console.log(error)
     }
+    navigate('/punkt');
   }
 
   const handleChange = (event) => {

@@ -10,6 +10,8 @@ const AdminHeader = () => {
         sessionStorage.removeItem('access');
         sessionStorage.removeItem('refresh');
         sessionStorage.removeItem('isAdmin');
+        sessionStorage.removeItem('isPracownik');
+        sessionStorage.removeItem('punkt');
       };
 
     let [isLoggedIn, setLoggedStatus] = useState(false);
@@ -18,8 +20,6 @@ const AdminHeader = () => {
     {
         isLoggedIn = true;
     }
-
-    const navigate = useNavigate();
     
 
     return (
@@ -29,8 +29,8 @@ const AdminHeader = () => {
             {/* <Link  to='/' className='navLink'> <i className="fa fa-fw fa-home"></i> Strona główna</Link> */}
             <Link  to='/patientProfile' className='navLink'><i className="fa fa-fw fa-user"></i> Profil</Link>
             <Link  to='/punktAdd' className='navLink'><i className="fa fa-fw fa-syringe"></i> Dodaj punkt szczepień</Link>
+            <Link  to='/punkt' className='navLink'><i className="fa fa-fw fa-user"></i> Edytuj punkty szczepień</Link>
             <Link  to='/szczepionkaAdd' className='navLink'><i className="fa fa-fw fa-syringe"></i> Dodaj szczepionkę</Link>
-            <Link  to='/punkt' className='navLink'><i className="fa fa-fw fa-user"></i> Punkty szczepień</Link>
             
             {isLoggedIn == false ? 
                 <Link  to='/login' className='navLink'><i className="fa-solid fa-right-to-bracket"></i> Zaloguj się</Link> :
