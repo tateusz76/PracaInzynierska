@@ -16,6 +16,7 @@ import AddPunkt from './Flow/AdminFlow/AddPunkt';
 import SzczepieniaByPunkt from './Flow/PracownikFlow/SzczepieniaByPunkt';
 import PacjentList from './Flow/PracownikFlow/PacjentList/PacjentList';
 import SzczepieniaToday from './Flow/PracownikFlow/SzczepieniaToday';
+import EditPunkt from './Flow/AdminFlow/EditPunkt';
 
 
 
@@ -56,6 +57,7 @@ function App() {
             {/* ADMIN */}
             <Route exact path="szczepionkaAdd" element={<AddSzczepionka/>} />
             <Route exact path="punktAdd" element={<AddPunkt/>} />
+            <Route exact path="punktEdit/:idPunkt" element={<EditPunkt/>} />
 
             {/* PRACOWNIK */}
             <Route exact path="szczepieniePunkt" element={<SzczepieniaByPunkt/>} />
