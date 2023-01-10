@@ -65,7 +65,12 @@ const PatientProfile= () => {
 
         <Link  to='/patientEditProfile' className='navLink'><h2>Zmień nazwę użytkownika</h2></Link>
       </div>
-      <CzyZaszczepiony/>
+      {sessionStorage.getItem("isAdmin") == "user" && sessionStorage.getItem("isPracownik") == "user"
+              ? <CzyZaszczepiony/>
+              : null
+              }
+
+        
     </div>
   );
 }
