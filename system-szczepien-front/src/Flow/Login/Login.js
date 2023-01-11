@@ -71,7 +71,8 @@ function Login() {
         <input type="submit" className='submitbtn' value="Wyślij" />
     </form>
 
-    <p>Nie jesteś zarejestrowanym pacjentem?</p><Link  to='/register'><i className="fa fa-fw fa-user"></i>Zarejestruj się</Link>
+    <Link  to='/sendPassword'><i className="fa fa-fw fa-user"></i>Zapomniałem hasła</Link>
+    <p>Nie jesteś zarejestrowanym pacjentem?</p><Link  to='/register'>Zarejestruj się</Link>
     {errorMessage?<label className='loginError'>{errorMessage}</label>:null} 
   </div>
     )

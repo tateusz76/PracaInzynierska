@@ -17,6 +17,9 @@ import SzczepieniaByPunkt from './Flow/PracownikFlow/SzczepieniaByPunkt';
 import PacjentList from './Flow/PracownikFlow/PacjentList/PacjentList';
 import SzczepieniaToday from './Flow/PracownikFlow/SzczepieniaToday';
 import EditPunkt from './Flow/AdminFlow/EditPunkt';
+import SendPassword from './Flow/Login/SendPassword/SendPassword';
+import PasswordSendInfo from './Flow/Login/SendPassword/PasswordSendInfo';
+import Contact from './Flow/Contact/Contact';
 
 
 
@@ -45,6 +48,9 @@ function App() {
             <Route exact path="login" element={<Login/>} />
             <Route exact path="register" element={<Register/>} />
             <Route exact path="logout" element={<Logout/>} />
+            <Route exact path="sendPassword" element={<SendPassword/>} />
+            <Route exact path="passwordSendInfo" element={<PasswordSendInfo/>} />
+            <Route exact path="contact" element={<Contact/>} />
 
             {/* Pacjent */}
             <Route exact path="patientProfile" element={<PatientProfile/>} />

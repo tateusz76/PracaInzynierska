@@ -62,8 +62,9 @@ const PatientProfile= () => {
         <h1 className='PatientProfile--header'>Witaj na swoim profilu  {patientData.username}</h1>
 
         <h3>{patientData.first_name} {patientData.last_name}</h3>
+        <h3>Adres email: {patientData.email}</h3>
 
-        <Link  to='/patientEditProfile' className='navLink'><h2>Zmień nazwę użytkownika</h2></Link>
+        <Link  to='/patientEditProfile' className='navLink'><h2>Zarządzaj profilem</h2></Link>
       </div>
       {sessionStorage.getItem("isAdmin") == "user" && sessionStorage.getItem("isPracownik") == "user"
               ? <CzyZaszczepiony/>
