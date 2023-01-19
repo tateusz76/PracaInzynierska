@@ -38,8 +38,6 @@ const SzczepieniaToday= () => {
 
 
     const myPunkt = szczepienieData.filter(e => {
-        console.log(new Date(e.dataSzczepienia));
-        console.log(new Date())
         return e.punkt == sessionStorage.getItem("punkt") && new Date(e.dataSzczepienia).toISOString().split('T')[0] === new Date().toISOString().split('T')[0];
     })
 

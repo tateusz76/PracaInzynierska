@@ -91,27 +91,27 @@ function Register() {
 
     <form className='RegisterForm' onSubmit={handleSubmit}>
     {/* <div className='formContainer'> */}
-      <label> Nazwa użytkownika:
+      <label className='registerLabel'> Nazwa użytkownika:
       {errorUsername?<label className='errorRegister'>{errorUsername}</label>:null} 
         <input type="text" name="username"  onChange={handleChange}/>
       </label>
 
-      <label> Imię:
+      <label className='registerLabel'> Imię:
       {errorFirst?<label className='errorRegister'>{errorFirst}</label>:null} 
         <input type="text" name="first_name"  onChange={handleChange}/>
       </label>
 
-      <label> Nazwisko:
+      <label className='registerLabel'> Nazwisko:
       {errorLast?<label className='errorRegister'>{errorLast}</label>:null} 
         <input type="text" name="last_name"  onChange={handleChange}/>
       </label>
 
-      <label> Adres Email:
+      <label className='registerLabel'> Adres Email:
       {errorEmail?<label className='errorRegister'>{errorEmail}</label>:null} 
         <input type="email" name="email"  onChange={handleChange}/>
       </label>
 
-      <label> Hasło
+      <label className='registerLabel'> Hasło
       {errorPassword?<label className='errorRegister'>{errorPassword}</label>:null} 
         <input type="password" name="password"  onChange={handleChange}/>
       </label>

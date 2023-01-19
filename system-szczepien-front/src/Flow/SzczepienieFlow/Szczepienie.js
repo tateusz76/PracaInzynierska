@@ -228,11 +228,11 @@ const Szczepienie = () => {
       <h1 style={{display: 'flex',  justifyContent:'center', alignItems:'center'}}>Zarejestruj się na szczepienie</h1>
       <div className="szczepienieRegister">
         <form className='szczepienieForm' onSubmit={handleSubmit}>
-          <label><h3> Data szczepienia:</h3>
+          <label className='szczepienieLabel'><h3> Data szczepienia:</h3>
             <input className='formInput' type="date" name="dataSzczepienia" onChange={handleDataChange}/>
           </label>
 
-          <label> <h3>Szczepionka:</h3>
+          <label className='szczepienieLabel'> <h3>Szczepionka:</h3>
           <select className='formInput' name='szczepionka' value={szczepionkaSelected} onChange={handleSzczepionkaChange}>
               {szczepionki.map(e => (
                 <option key={e.nazwaSzczepionki} value={e.nazwaSzczepionki} >
@@ -242,7 +242,7 @@ const Szczepienie = () => {
             </select>
           </label>
 
-          <label> <h3>Punkt Szczepień:</h3>
+          <label className='szczepienieLabel'> <h3>Punkt Szczepień:</h3>
           <select className='formInput' name='punkt'  value={punktSelected} onChange={handlePunktchange}>
               {punkty.map(e => (
                 <option key={e.nazwa} value={e.nazwa}>

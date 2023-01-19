@@ -10,3 +10,8 @@
   align-items: center;
   text-align: center;
 }
+
+.editLabel {
+  display: flex;
+  flex-direction: column;
+}

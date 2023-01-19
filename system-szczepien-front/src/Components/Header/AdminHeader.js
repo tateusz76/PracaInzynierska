@@ -1,6 +1,9 @@
 import React from "react";
 import {BrowserRouter as Router, Route, Routes, Link, useNavigate} from 'react-router-dom';
-import { useContext, useState } from 'react';
+import { useState } from 'react';
+import { HiMail, HiUser} from 'react-icons/hi';
+import { RiHospitalFill, RiSyringeFill} from 'react-icons/ri';
+import { BiLogIn, BiLogOut } from 'react-icons/bi';
 import './Header.css';
 
 
@@ -27,14 +30,14 @@ const AdminHeader = () => {
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"></link>
         <div className='navLinks'>
             {/* <Link  to='/' className='navLink'> <i className="fa fa-fw fa-home"></i> Strona główna</Link> */}
-            <Link  to='/patientProfile' className='navLink'><i className="fa fa-fw fa-user"></i> Profil</Link>
-            <Link  to='/punktAdd' className='navLink'><i className="fa fa-fw fa-syringe"></i> Dodaj punkt szczepień</Link>
-            <Link  to='/punkt' className='navLink'><i className="fa fa-fw fa-user"></i> Edytuj punkty szczepień</Link>
-            <Link  to='/szczepionkaAdd' className='navLink'><i className="fa fa-fw fa-syringe"></i> Dodaj szczepionkę</Link>
+            <Link  to='/patientProfile' className='navLink'><HiUser/> Profil</Link>
+            <Link  to='/punktAdd' className='navLink'><RiHospitalFill/> Dodaj punkt szczepień</Link>
+            <Link  to='/punkt' className='navLink'><RiHospitalFill/> Edytuj punkty szczepień</Link>
+            <Link  to='/szczepionkaAdd' className='navLink'><RiSyringeFill/> Dodaj szczepionkę</Link>
             
             {isLoggedIn == false ? 
-                <Link  to='/login' className='navLink'><i className="fa-solid fa-right-to-bracket"></i> Zaloguj się</Link> :
-                <Link onClick={logout}  to='/login' className='navLink'><i className="fa-solid fa-right-from-bracket"></i>Wyloguj się</Link>}
+                <Link  to='/login' className='navLink'><BiLogIn/> Zaloguj się</Link> :
+                <Link onClick={logout}  to='/login' className='navLink'><BiLogOut/> Wyloguj się</Link>}
         </div>
     </div>
     )

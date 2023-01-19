@@ -34,7 +34,7 @@ const CzyZaszczepiony= () => {
         }
     });
 
-    szczepienieData.sort((a, b) => new Date(a.id) - new Date(b.id))
+    szczepienieData.sort((a, b) => new Date(b.id) - new Date(a.id))
 
     return (
         <div className="czyZaszczepiony">

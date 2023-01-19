@@ -58,3 +58,15 @@ a {
   color: red;
   margin-top: 3%;
 }
+
+.registerLabel {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.addPunktLabel {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
