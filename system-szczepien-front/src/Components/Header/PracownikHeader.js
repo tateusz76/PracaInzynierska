@@ -31,7 +31,7 @@ const PracownikHeader = () => {
         <div className='navLinks'>
             {/* <Link  to='/' className='navLink'> <i className="fa fa-fw fa-home"></i> Strona główna</Link> */}
             <Link  to='/patientProfile' className='navLink'><HiUser/> Profil</Link>
-            <Link  to='/szczepieniePunkt' className='navLink'><RiSyringeFill/> Lista szczepień w punkcie</Link>
+            <Link  to='/szczepieniePunkt' className='navLink'><RiSyringeFill/> Nadchodzące szczepienia</Link>
             <Link  to='/szczepieniaToday' className='navLink'><RiSyringeFill/> Dzisiejsze szczepienia</Link>
             <Link  to='/pacjentList' className='navLink'><HiClipboardList/> Lista pacjentów</Link>
             

@@ -61,27 +61,27 @@ function AddPunkt() {
       <div className="AddPunkt">
 
         <form onSubmit={handleSubmit}>
-          <label> Nazwa punktu:
+          <label className="addPunktLabel"> Nazwa punktu:
             <input type="text" name="nazwa"  onChange={handleChange}/>
           </label>
 
-          <label> Miasto:
+          <label className="addPunktLabel"> Miasto:
             <input type="text" name="miasto"  onChange={handleChange}/>
           </label>
 
-          <label> Ulica:
+          <label className="addPunktLabel"> Ulica:
             <input type="text" name="ulica"  onChange={handleChange}/>
           </label>
 
-          <label> Numer budynku:
+          <label className="addPunktLabel"> Numer budynku:
             <input type="text" name="numer"  onChange={handleChange}/>
           </label>
 
-          <label> Koordynaty X punktu:
+          <label className="addPunktLabel"> Koordynaty X punktu:
             <input type="text" name="centerX" onChange={handleChange} value={anchor[0].toFixed(4)}/>
           </label>
 
-          <label> Koordynaty Y punktu:
+          <label className="addPunktLabel"> Koordynaty Y punktu:
             <input type="text" name="centerY" onChange={handleChange}  value={anchor[1].toFixed(4)}/>
           </label>
 

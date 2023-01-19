@@ -53,8 +53,8 @@ const PatientEditProfile= () => {
         <div className="EditForm">
           <h1 className='PatientEditProfile--header'>Edycja profilu</h1>
           <form onSubmit={handleSubmit}>
-              <label> Zmień nazwę użytkownika:
-                  <input type="text" name="username"  onChange={handleChange}/>
+              <label className="editLabel"> Zmień nazwę użytkownika:
+                  <input type="text" name="username"  onChange={handleChange}/><br/>
               </label>
               <input type="submit" className='submitbtn' value="Wyślij" />
           </form>

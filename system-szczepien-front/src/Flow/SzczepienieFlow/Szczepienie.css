@@ -29,7 +29,7 @@
   align-items: center;
 }
 
-label {
+.szczepienieLabel {
   display: flex;
   flex-direction: column;
 }

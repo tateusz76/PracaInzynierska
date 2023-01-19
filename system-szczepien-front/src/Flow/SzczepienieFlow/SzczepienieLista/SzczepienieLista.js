@@ -78,8 +78,8 @@ const SzczepienieLista= () => {
           {displayNext.length > 0 && <u><h1>Nadchodzące szczepienia:</h1></u>}
           {displayNext.length > 0 ? displayNext : <u><h1>Brak nadchodzących szczepień</h1></u>}
           
-          {displaySzczepienie.length <= 0 && displayNext.length > 0 && <p>Jeśli nie otrzymałeś jeszcze pierwszej dawki, możesz anulować szczepienie w celu ponownej rejestracji lub wycofania się ze szczepienia.</p>}
-          {displaySzczepienie.length <= 0 && displayNext.length > 0 && <button className="submitbtn" onClick={handleDelete}>Anuluj zapis na szczepienie</button>}
+          {displayNext.length > 0 && <p>Jeśli nie otrzymałeś jeszcze pierwszej dawki, możesz anulować szczepienie w celu ponownej rejestracji lub wycofania się ze szczepienia.</p>}
+          {displayNext.length > 0 && <button className="submitbtn" onClick={handleDelete}>Anuluj zapis na szczepienie</button>}
         </div>
     </div>
   );
